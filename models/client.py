@@ -27,6 +27,7 @@ class Client(db.Model):
     phone = db.Column(db.String(50))
     status = db.Column(db.String(20), nullable=False, default="active")
     notes = db.Column(db.Text)
+    is_deleted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
 
     services = db.relationship("Service", backref="client", lazy=True, cascade="all, delete-orphan")

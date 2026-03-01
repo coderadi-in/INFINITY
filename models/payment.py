@@ -25,4 +25,5 @@ class Payment(db.Model):
     paid_on = db.Column(db.Date)
     method = db.Column(db.String(100))
     status = db.Column(db.String(20), nullable=False)
+    is_deleted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
