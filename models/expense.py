@@ -25,7 +25,6 @@ class Expense(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    related_server_id = db.Column(db.Integer, db.ForeignKey("server.id"))
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
     amount = db.Column(db.Numeric(10, 2), nullable=False)
