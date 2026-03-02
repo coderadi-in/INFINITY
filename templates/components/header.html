@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/header.css') }}">
+
+<header class="header p-20 rounded-16 row h-sb shadow-sm w-full">
+    <h1 class="h1 link" id="openSidebar">INFINITY</h1>
+
+    <ul class="list row gap-20">
+        <li><a href="/settings/" class="link"><span class="symbol fl-icon">settings</span></a></li>
+        <li><a href="/account/" class="link"><span class="symbol fl-icon">person</span></a></li>
+    </ul>
+</header>
+
+<script type="module" src="{{ url_for('static', filename='js/components/header.js') }}"></script>

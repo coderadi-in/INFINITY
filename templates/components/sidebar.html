@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/sidebar.css') }}">
+
+<aside class="sidebar p-20 rounded-16 column h-sb shadow-sm">
+    <div class="content column gap-20">
+        <div class="head column gap-12">
+            <div class="row h-sb">
+                <img src="{{ url_for('static', filename='assets/icons/logo.png') }}" alt="INFINITY LOGO" class="logo">
+
+                <span class="symbol link" id="closeSidebar">collapse_content</span>
+            </div>
+
+            <hr class="divider">
+        </div>
+
+        <div class="navigation column gap-12">
+            <h3 class="h3 uppercase">navigation</h3>
+            
+            <a href="/dashboard/" class="link btn fl row gap-12 p-12 rounded-16">
+                <span class="symbol fl-icon">dashboard</span>
+                <span class="text uppercase">dashboard</span>
+            </a>
+
+            <a href="/clients/" class="link btn fl row gap-12 p-12 rounded-16">
+                <span class="symbol fl-icon">group</span>
+                <span class="text uppercase">all clients</span>
+            </a>
+
+            <a href="/services/" class="link btn fl row gap-12 p-12 rounded-16">
+                <span class="symbol fl-icon">apps</span>
+                <span class="text uppercase">services</span>
+            </a>
+
+            <hr class="divider">
+        </div>
+
+        <div class="statistics column gap-12">
+            <h3 class="h3 uppercase">statistics</h3>
+
+            <a href="/numbers/" class="link btn fl row gap-12 p-12 rounded-16">
+                <span class="symbol fl-icon">storage</span>
+                <span class="text uppercase">numbers</span>
+            </a>
+
+            <a href="/insights/" class="link btn fl row gap-12 p-12 rounded-16">
+                <span class="symbol fl-icon">pie_chart</span>
+                <span class="text uppercase">insights</span>
+            </a>
+
+            <hr class="divider">
+        </div>
+
+        <div class="infinity column gap-12">
+            <h3 class="h3 uppercase">infinity</h3>
+
+            <a href="/infinity/calm-mode/" class="link row gap-12">
+                <span class="symbol fl-icon">relax</span>
+                <span class="text uppercase">calm mode</span>
+            </a>
+
+            <a href="/infinity/core/" class="link row gap-12">
+                <span class="symbol fl-icon">open_in_new</span>
+                <span class="text uppercase">infinity core</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="column center gap-12">
+        <ul class="list row gap-12">
+            <li><a href="/settings/" class="link"><span class="symbol fl-icon">settings</span></a></li>
+            <li><a href="/docs/" class="link"><span class="symbol">question_mark</span></a></li>
+            <li><a href="/report/" class="link"><span class="symbol">error</span></a></li>
+        </ul>
+
+        <span class="mini uppercase text-center">infinity</span>
+    </div>
+</aside>
+
+<script type="module" src="{{ url_for('static', filename='js/components/sidebar.js') }}"></script>

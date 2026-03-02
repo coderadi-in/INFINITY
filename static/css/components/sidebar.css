@@ -1,0 +1,24 @@
+.sidebar {
+    background-color: var(--surface);
+    min-width: 300px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 260ms ease, opacity 260ms ease;
+}
+
+.sidebar .elem {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 260ms ease, opacity 260ms ease, background-color 0.4s ease-in-out;
+}
+
+.sidebar.is-hidden {
+    opacity: 0;
+    transform: translateY(40%);
+    pointer-events: none;
+}
+
+.sidebar.is-hidden .elem {
+    opacity: 0;
+    transform: translateY(40%);
+}

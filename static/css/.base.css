@@ -38,6 +38,7 @@
     padding: 0;
     font-family: "Inter", sans-serif;
     box-sizing: border-box;
+    letter-spacing: 1px;
 }
 
 *::-webkit-scrollbar { display: none; }
@@ -58,6 +59,13 @@ body {
 }
 
 html { scroll-behavior: smooth; }
+
+.app-content {
+    width: 100%;
+    align-items: end;
+}
+
+.main { height: 100vh; }
 
 /* ================================================== */
 /* DISPLAY */
@@ -198,7 +206,6 @@ html { scroll-behavior: smooth; }
 .h2-lw {
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 400;
-    text-transform: none;
     font-size: var(--f3);
     letter-spacing: 2px;
 }
@@ -206,21 +213,18 @@ html { scroll-behavior: smooth; }
 .h3 {
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 400;
-    text-transform: none;
     font-size: var(--f2);
     letter-spacing: 1px;
 }
 
 .text, .para {
     font-weight: 400;
-    text-transform: none;
     font-size: var(--f1);
     letter-spacing: 1px;
 }
 
 .mini {
     font-weight: 400;
-    text-transform: none;
     font-size: var(--f0);
     letter-spacing: 1px;
 }
@@ -270,8 +274,6 @@ html { scroll-behavior: smooth; }
 }
 
 .btn {
-    padding: 16px;
-    border-radius: 16px;
     background-color: transparent;
     cursor: pointer;
     border: none;
@@ -285,7 +287,7 @@ html { scroll-behavior: smooth; }
 
 .fl {
     background-color: var(--primary);
-    color: var(--background);
+    color: var(--background) !important;
     transition: background-color 0.4s ease-in-out;
 }
 .fl:hover { background-color: var(--secondary); }
@@ -303,7 +305,7 @@ html { scroll-behavior: smooth; }
     align-items: center;
     gap: 10px;
     background-color: var(--primary);
-    color: var(--background);
+    color: var(--background) !important;
     transition: background-color 0.4s ease-in-out;
 }
 .icon-fl:hover { background-color: var(--secondary); }
