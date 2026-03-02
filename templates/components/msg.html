@@ -5,7 +5,7 @@
 <ul class="alerts list column gap-20">
     {% for category, message in flashes %}
     <li class="alert row gap-12 rounded-12 shadow-sm p-12 border">
-        <span class="symbol category">{{ category }}</span>
+        <span class="symbol {{ category }}">{{ category }}</span>
         <span class="text">{{ message }}</span>
     </li>
     {% endfor %}
