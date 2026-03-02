@@ -3,9 +3,15 @@
 # ? IMPORTS
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from plugins import *
+from models import *
 
 # ! INITIALIZATION
 app = Blueprint("app", __name__)
+
+# | USER LOADER
+@logger.user_loader
+def load_user(user):
+    return User.query.get(user)
 
 # & INDEX ROUTE
 @app.route('/')
