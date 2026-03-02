@@ -366,3 +366,12 @@ html { scroll-behavior: smooth; }
 }
 
 .fl-icon {font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;}
+
+/* ================================================== */
+/* OTHER ELEMENTS */
+/* ================================================== */
+
+.divider { border: 1px solid var(--border); }
+
+.list { list-style-type: none; }
+.no-list { list-style-position: inside; }

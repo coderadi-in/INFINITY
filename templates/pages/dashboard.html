@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>DASHBOARD &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/.base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/dashboard.css') }}">
+</head>
+<body>
+    {% include 'components/msg.html' %}
+
+    <main class="main p-20 flex gap-20">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content column gap-20">
+            {% include 'components/header.html' %}
+
+            <section class="app-body"></section>
+        </section>
+    </main>
+</body>
+</html>

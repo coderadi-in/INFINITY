@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/msg.css') }}">
+
+{% with flashes = get_flashed_messages(with_categories=true) %}
+{% if flashes %}
+<ul class="alerts list column gap-20">
+    {% for category, message in flashes %}
+    <li class="alert row gap-12 rounded-12 shadow-sm p-12 border">
+        <span class="symbol category">{{ category }}</span>
+        <span class="text">{{ message }}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<script type="module" src="{{ url_for('static', filename='js/components/msg.js') }}"></script>

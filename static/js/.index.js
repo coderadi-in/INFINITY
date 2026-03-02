@@ -1,4 +1,10 @@
 // ==================================================
+// IMPORTS
+// ==================================================
+
+import { wait } from '../js/.base.js';
+
+// ==================================================
 // SIGNUP/LOGIN TRANSITION
 // ==================================================
 
@@ -26,7 +32,6 @@ let activePanel = "signup";
 // REUSABLE HELPERS
 // ==================================================
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const OPACITY_TRANSITION = `opacity ${FADE_DURATION}ms ease-in-out`;
 
 const setContentState = (content, isVisible) => {

@@ -37,6 +37,7 @@ def signup():
 
     # LOGIN & REDIRECT USER
     login_user(new_user)
+    flash("Your INFINITY account has been signed up.", "check_circle")
     return redirect(url_for('app.dashboard'))
 
 
@@ -68,6 +69,7 @@ def login():
 
     # LOGIN & REDIRECT USER
     login_user(logged_user)
+    flash("Your INFINITY account has been logged in.", "check_circle")
     return redirect(url_for('app.dashboard'))
 
 

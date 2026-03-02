@@ -1,0 +1,46 @@
+/* ================================================== */
+/* FLASH MESSAGE CONTAINER */
+/* ================================================== */
+
+.alerts {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: min(420px, calc(100vw - 40px));
+    z-index: 999;
+}
+
+/* ================================================== */
+/* FLASH MESSAGE ITEM */
+/* ================================================== */
+
+.alerts > .alert {
+    background-color: var(--surface);
+    will-change: transform, opacity;
+}
+
+/* Hidden state: below the viewport with zero opacity. */
+.alert-item-hidden {
+    transform: translateY(40px);
+    opacity: 0;
+}
+
+/* Enter/visible state: moved upward into place and fully visible. */
+.alert-item-visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Exit state: move down again and fade out. */
+.alert-item-exit {
+    transform: translateY(40px);
+    opacity: 0;
+}
+
+/* Shared transition timing for all animation states. */
+.alert-item-animate {
+    transition: transform 280ms ease, opacity 280ms ease;
+}
+
+.alert .check_circle { color: var(--accent-green); }
+.alert .error { color: var(--accent-red); }
