@@ -1,0 +1,56 @@
+/* ================================================== */
+/* HEADER */
+/* ================================================== */
+
+.header {
+    position: fixed;
+    background-color: var(--surface-alt);
+}
+
+/* ================================================== */
+/* CONTAINER */
+/* ================================================== */
+
+.section {
+    max-width: 900px;
+}
+
+/* ================================================== */
+/* LEFT PANEL */
+/* ================================================== */
+
+.left-panel {
+    background-color: var(--surface);
+    position: relative;
+    aspect-ratio: 1 / 1;
+}
+
+.left-panel .signup-content,
+.left-panel .login-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--surface);
+}
+
+/* ================================================== */
+/* CONTENT STACK ORDER */
+/* ================================================== */
+
+.left-panel .signup-content {
+    z-index: 2;
+}
+
+.left-panel .login-content {
+    z-index: 1;
+}
+
+/* ================================================== */
+/* RIGHT PANEL */
+/* ================================================== */
+
+.right-panel {
+    aspect-ratio: 1 / 1;
+}

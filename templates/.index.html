@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>AUVORA INFINITY &bull; A NEW STANDARD IN PRODUCTIVITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/.base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/.index.css') }}">
+</head>
+
+<body>
+    <header class="header center w-full p-16">
+        <a href="/" class="link">
+            <img src="{{ url_for('static', filename='assets/icons/logo.png') }}" alt="INFINITY LOGO" class="logo">
+        </a>
+    </header>
+
+    <main class="main column center h-screen">
+        <section class="start" id="start">
+            <section class="section center gap-20">
+                <div class="left-panel rounded-16 w-full shadow-sm">
+                    <div class="signup-content column h-sb p-20 gap-20 rounded-16">
+                        <div class="heading column">
+                            <h1 class="h1 elem">get started</h1>
+                            <p class="para elem">Fill your credentials and start using INFINITY</p>
+                        </div>
+
+                        <form action="/auth/signup" method="post" class="form column gap-12">
+                            <div class="form-elem elem column gap-4">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" class="input" placeholder="Your name">
+                            </div>
+
+                            <div class="form-elem elem column gap-4">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" class="input"
+                                    placeholder="Your/Company email">
+                            </div>
+
+                            <div class="form-elem elem column gap-4">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="input"
+                                    placeholder="Create a password">
+                            </div>
+
+                            <button type="submit" class="btn elem fl">
+                                <span class="mini title">get started</span>
+                            </button>
+                        </form>
+
+                        <span class="text ulink elem" id="openLogin">Already have an account? Login</span>
+                    </div>
+
+                    <div class="login-content column h-sb gap-20 p-20 rounded-16">
+                        <div class="heading column">
+                            <h1 class="h1 elem">welcome back</h1>
+                            <p class="para elem">Login with your credentials to continue using INFINITY</p>
+                        </div>
+
+                        <form action="/auth/login" method="post" class="form column gap-12">
+                            <div class="form-elem elem column gap-4">
+                                <label for="login-email">Email</label>
+                                <input type="email" name="email" id="login-email" class="input"
+                                    placeholder="Your/Company email">
+                            </div>
+
+                            <div class="form-elem elem column gap-4">
+                                <label for="login-password">Password</label>
+                                <input type="password" name="password" id="login-password" class="input"
+                                    placeholder="Enter your password">
+                            </div>
+
+                            <button type="submit" class="btn elem fl">
+                                <span class="mini title">login</span>
+                            </button>
+                        </form>
+
+                        <span class="text ulink elem" id="openSignup">Don't have an account? Signup</span>
+                    </div>
+                </div>
+
+                <div class="right-panel w-full shadow-sm">
+                    <img src="{{ url_for('static', filename='assets/icons/logo.png') }}" alt="INFINITY LOGO"
+                        class="img rounded-16">
+                </div>
+            </section>
+        </section>
+    </main>
+    
+    <script src="{{ url_for('static', filename='js/.index.js') }}"></script>
+</body>
+
+</html>
