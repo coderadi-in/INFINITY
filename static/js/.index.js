@@ -35,25 +35,20 @@ const setContentState = (content, isVisible) => {
 };
 
 // Keep existing CSS transitions (like button background-color hover)
-// and append opacity transition only when it is missing.
+// and append opacity transition for every element.
 const ensureOpacityTransition = (element) => {
     const computed = window.getComputedStyle(element);
-    const properties = computed.transitionProperty.split(",").map((property) => property.trim());
-    const hasOpacityTransition = properties.includes("opacity") || properties.includes("all");
+    const computedTransition = computed.transition.trim();
+    const hasOpacityTransition = /\bopacity\b/.test(computedTransition);
+    const hasExistingTransition = computedTransition && computedTransition !== "none 0s ease 0s";
 
     if (hasOpacityTransition) {
-        return;
-    }
-
-    const computedTransition = computed.transition.trim();
-    const hasUsableTransition = computedTransition && computedTransition !== "all 0s ease 0s";
-
-    if (hasUsableTransition) {
+        element.style.transition = computedTransition;
+    } else if (hasExistingTransition) {
         element.style.transition = `${computedTransition}, ${OPACITY_TRANSITION}`;
-        return;
+    } else {
+        element.style.transition = OPACITY_TRANSITION;
     }
-
-    element.style.transition = OPACITY_TRANSITION;
 };
 
 const prepareElems = (elements, opacity) => {
