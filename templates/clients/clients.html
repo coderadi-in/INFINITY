@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>CLIENTS &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clients/clients.css') }}">
+</head>
+
+<body>
+    {% include 'components/msg.html' %}
+    {% include 'widgets/new_client.html' %}
+
+    <main class="main">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content">
+            {% include 'components/header.html' %}
+
+            <section class="app-body">
+                <div class="head row h-sb">
+                    <h2 class="h2">all clients</h2>
+
+                    <div class="row gap-8">
+                        <span class="link symbol" id="addClientBtn">add</span>
+                        <input type="number" name="yearSelect" id="yearSelect" class="input" value="2026">
+                        <span class="link symbol" id="filterClientBtn">filter_list</span>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>

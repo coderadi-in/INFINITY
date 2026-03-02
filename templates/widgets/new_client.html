@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/wizard.css') }}">
+
+<section class="center w-full h-screen wizard-container">
+    <form action="/clients/new" method="post" class="form column gap-20 p-20 rounded-16">
+        <span class="link symbol" id="closeWizard">close</span>
+
+        <div class="heading column">
+            <h3 class="h3 uppercase">new client</h3>
+            <p class="para">Add client details below to add new client</p>
+        </div>
+
+        <div class="input-list column gap-12">
+            <div class="form-elem column gap-4">
+                <label for="name">Name*</label>
+                <input required type="text" name="name" id="name" class="input" placeholder="e.g.: Aditya">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="input" placeholder="e.g.: adi@coderadi.in">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" id="phone" class="input" placeholder="e.g.: 9987766544">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" class="input" placeholder="Anything you want to note about..."></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn fl p-12 rounded-16">
+            <span class="mini uppercase">add client</span>
+        </button>
+    </form>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/base/wizard.js') }}"></script>

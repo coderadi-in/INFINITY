@@ -12,7 +12,7 @@ clients = Blueprint("clients", __name__, url_prefix='/clients')
 @clients.route('/')
 @login_required
 def all_clients():
-    return render_template('clients/all_clients.html')
+    return render_template('clients/clients.html')
 
 # & CLIENT INFO ROUTE
 @clients.route('/<client>/')
