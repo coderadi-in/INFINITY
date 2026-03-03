@@ -1,0 +1,30 @@
+/* ================================================== */
+/* TOP ROW */
+/* ================================================== */
+
+.top-row .active { background-color: var(--accent-green); }
+.top-row .inactive { background-color: var(--accent-red); }
+
+/* ================================================== */
+/* CONTROLS ROW */
+/* ================================================== */
+
+.controls-row .btn { width: 230px; }
+
+/* ================================================== */
+/* INFO ROW */
+/* ================================================== */
+
+.info-row {
+    height: 50%;
+    overflow: scroll;
+}
+
+.info-row .provided-services { background-color: var(--surface); }
+
+/* ================================================== */
+/* PAYMENTS ROW */
+/* ================================================== */
+
+.payments-table { overflow: scroll; }
+.payments-table tr { background-color: var(--surface); }

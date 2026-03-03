@@ -33,4 +33,4 @@ class Expense(db.Model):
     recurring = db.Column(db.Boolean, nullable=False, default=False)
     recurring_cycle = db.Column(db.String(20))
     is_deleted = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    created_at = db.Column(db.Date, nullable=False, default=db.func.current_date())

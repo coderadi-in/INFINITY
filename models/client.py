@@ -15,7 +15,7 @@ class Client(db.Model):
         phone (str | None): Optional client phone number.
         status (str): Lifecycle state, either "active" or "inactive".
         notes (str | None): Optional notes about the client.
-        created_at (datetime): Timestamp when the client was created.
+        created_at (date): Date when the client was created.
     """
 
     __tablename__ = "client"
@@ -28,6 +28,6 @@ class Client(db.Model):
     status = db.Column(db.String(20), nullable=False, default="active")
     notes = db.Column(db.Text)
     is_deleted = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    created_at = db.Column(db.Date, nullable=False, default=db.func.current_date())
 
     services = db.relationship("Service", backref="client", lazy=True, cascade="all, delete-orphan")

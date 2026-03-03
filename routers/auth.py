@@ -11,7 +11,7 @@ auth = Blueprint("auth", __name__, url_prefix='/auth')
 # & START ROUTE
 @auth.route('/start/')
 def start():
-    return render_template('auth/start.html')
+    return render_template('.index.html')
 
 
 @auth.route('/signup', methods=['POST'])

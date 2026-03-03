@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>{{ data.client.name }} &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clients/client.css') }}">
+</head>
+
+<body>
+    {% include 'components/msg.html' %}
+    {% include 'widgets/update_client.html' %}
+    {% include 'widgets/delete_client.html' %}
+
+    <main class="main">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content">
+            {% include 'components/header.html' %}
+
+            <section class="app-body column gap-12">
+                <div class="top-row row h-sb">
+                    <div class="client_credentials row gap-12">
+                        <h2 class="h2">{{ data.client.name }}</h2>
+                        <span class="text">&bull;</span>
+                        <span class="text uppercase ph-8 pv-4 rounded-4 {{ data.client.status }}">{{ data.client.status }}</span>
+                    </div>
+
+                    <ul class="list row gap-12">
+                        <li><button class="btn" id="updateClientBtn"><span class="symbol fl-icon">border_color</span></button></li>
+                        <li><button class="btn" id="deleteClientBtn"><span class="symbol fl-icon">delete</span></button></li>
+                    </ul>
+                </div>
+
+                <div class="controls-row row gap-12">
+                    <hr class="divider-l w-full">
+
+                    <a href="#" class="link btn icon-fl p-8 rounded-16">
+                        <span class="symbol">event</span>
+                        <span class="text fl-icon">Send reminder</span>
+                    </a>
+
+                    <a href="#" class="link btn icon-fl p-8 rounded-16">
+                        <span class="symbol">receipt</span>
+                        <span class="text fl-icon">Add receipt</span>
+                    </a>
+                </div>
+
+                <div class="info-row flex gap-12">
+                    <div class="client-info column gap-12 w-full">
+                        <div class="renewal">
+                            <span class="mini uppercase text-muted">next renewal</span>
+                            <h1 class="h1">{{ data.payments.next_bill }}</h1>
+                        </div>
+                        
+                        <hr class="divider">
+
+                        <div class="total-bill">
+                            <span class="mini uppercase text-muted">total bill</span>
+                            <h1 class="h1">{{ data.payments.total_bill }}</h1>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="notes column gap-12">
+                            <span class="mini uppercase text-muted">notes</span>
+                            <p class="para">{{ data.client.notes }}</p>
+                        </div>
+                    </div>
+
+                    <div class="provided-services column gap-20 w-full p-20 rounded-16">
+                        <div class="head column gap-12">
+                            <h3 class="h3">Provided services</h3>
+                            <hr class="divider">
+                        </div>
+
+                        {% for service in data.services %}
+                            <div class="service-info column gap-8">
+                                <div class="content column">
+                                    <span class="mini uppercase text-muted">{{ service.type }}</span>
+                                    <h2 class="h2">{{ service.title }}</h2>
+                                    <span class="text">{{ service.amount }}</span>
+                                </div>
+                                <hr class="divider">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="payments-row column gap-12">
+                    <div class="head row gap-12">
+                        <h2 class="h2">payments</h2>
+                        <hr class="divider w-full">
+                    </div>
+
+                    <table class="payments-table column gap-12">
+                        <thead class="w-full">
+                            <tr class="grid cols-3 p-12">
+                                <th class="flex"><span class="text uppercase text-left w-full">date</span></th>
+                                <th class="flex"><span class="text uppercase text-center w-full">amount</span></th>
+                                <th class="flex"><span class="text uppercase text-right w-full">method</span></th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="w-full">
+                            {% for transaction in data.transactions %}
+                                <tr class="grid cols-3 p-12">
+                                    <td class="flex"><span class="text text-left w-full">{{ transaction.paid_on }}</span></td>
+                                    <td class="flex"><span class="text text-center w-full">{{ transaction.amount }}</span></td>
+                                    <td class="flex"><span class="text text-right w-full">{{ transaction.method }}</span></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script type="module" src="{{ url_for('static', filename='js/clients/client.js') }}"></script>
+</body>
+
+</html>

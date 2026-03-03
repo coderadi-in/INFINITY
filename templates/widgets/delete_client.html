@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/wizard.css') }}">
+
+<section class="center w-full h-screen wizard-container" id="deleteClientWizard">
+    <form action="/clients/{{ data.client.id }}/delete" method="post" class="form column gap-20 p-20 rounded-16">
+        <span class="link symbol" id="closeWizard">close</span>
+
+        <div class="heading column">
+            <h3 class="h3 uppercase">delete client</h3>
+            <p class="para">Are you sure to delete this client?</p>
+        </div>
+
+        <div class="form-elem column gap-4">
+            <label for="password">Your password</label>
+            <input required type="password" name="password" id="password" class="input" placeholder="Enter you password to confirm">
+        </div>
+
+        <span class="mini">The deleted data will be stored in the trash file for 30 days, then it will be permanently deleted. You can restore the data within 30 days.</span>
+
+        <button type="submit" class="btn fl p-12 rounded-16">
+            <span class="mini uppercase">delete client</span>
+        </button>
+    </form>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/base/wizard.js') }}"></script>

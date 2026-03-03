@@ -32,6 +32,6 @@ class Service(db.Model):
     last_paid_date = db.Column(db.Date)
     status = db.Column(db.String(20), nullable=False, default="active")
     is_deleted = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    created_at = db.Column(db.Date, nullable=False, default=db.func.current_date())
 
     payments = db.relationship("Payment", backref="service", lazy=True, cascade="all, delete-orphan")

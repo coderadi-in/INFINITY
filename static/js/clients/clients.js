@@ -10,9 +10,9 @@ import { toggleWizard } from '../base/wizard.js';
 
 // ? GETTING DOC ELEMENTS
 const addClientBtn = document.getElementById("addClientBtn");
-const clientWizard = document.getElementById("clientWizard");
+const newClientWizard = document.getElementById("newClientWizard");
 
 // & EVENT LISTENER TO OPEN ADD-CLIENT WIZARD
 addClientBtn.addEventListener('click', () => {
-    toggleWizard(clientWizard);
+    toggleWizard(newClientWizard);
 })

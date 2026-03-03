@@ -23,6 +23,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     plan_type = db.Column(db.String(20), nullable=False, default="free")
-    created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    created_at = db.Column(db.Date, nullable=False, default=db.func.current_date())
 
     clients = db.relationship("Client", backref="user", lazy=True, cascade="all, delete-orphan")

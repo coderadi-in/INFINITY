@@ -1,6 +1,7 @@
 '''coderadi &bull; Clients navigation routes management file for the Project.'''
 
 # ? IMPORTS
+from datetime import date
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from plugins import *
 from models import *
@@ -12,7 +13,9 @@ clients = Blueprint("clients", __name__, url_prefix='/clients')
 @clients.route('/')
 @login_required
 def all_clients():
-    return render_template('clients/clients.html')
+    return render_template('clients/clients.html', data={
+        'clients': current_user.clients
+    })
 
 # & CLIENT INFO ROUTE
 @clients.route('/<client>/')
@@ -29,14 +32,51 @@ def specific_client(client):
     if (client_obj.user_id != current_user.id):
         flash("There is not client integrated to this INFINITY account.", "error")
         return redirect(url_for('clients.all_clients'))
+
+    # PAYMENT SUMMARY
+    total_bill = db.session.query(
+        db.func.coalesce(db.func.sum(Service.amount), 0)
+    ).filter(
+        Service.client_id == client_obj.id,
+        Service.is_deleted == False,
+        Service.status == "active"
+    ).scalar()
+
+    next_bill = db.session.query(
+        db.func.min(Service.next_renewal_date)
+    ).filter(
+        Service.client_id == client_obj.id,
+        Service.is_deleted == False,
+        Service.status == "active",
+        Service.next_renewal_date >= date.today()
+    ).scalar()
+
+    if (not next_bill):
+        next_bill = "N/A"
+
+    transactions = Payment.query.join(Service).filter(
+        Service.client_id == client_obj.id,
+        Service.is_deleted == False,
+        Payment.is_deleted == False
+    ).order_by(
+        Payment.paid_on.desc(),
+        Payment.created_at.desc()
+    ).all()
     
     # RETURN CLIENT INFO PAGE
     return render_template('clients/client.html', data={
-        'client': client_obj
+        'client': client_obj,
+        'services': client_obj.services,
+
+        'payments': {
+            'total_bill': total_bill,
+            'next_bill': next_bill
+        },
+        'transactions': transactions
     })
 
 # & UPDATE CLIENT ROUTE
-@clients.route('/<client>/update', methods=['PUT'])
+@clients.route('/<client>/update', methods=['POST'])
 @login_required
 def update_client(client):
     # FETCH DATABASE DATA
@@ -106,9 +146,17 @@ def new_client():
     return redirect(url_for('clients.specific_client', client=new_client_obj.id))
 
 # & DELETE CLIENT ROUTE
-@clients.route('/<client>/delete', methods=['DELETE'])
+@clients.route('/<client>/delete', methods=['POST'])
 @login_required
 def delete_client(client):
+    # ACCESS FORM DATA
+    password_input = request.form.get('password')
+
+    # USER VALIDATION
+    if (not bcrypt.check_password_hash(current_user.password, password_input)):
+        flash("The provided password isn't hashed with this INFINITY account.", "error")
+        return redirect(url_for('clients.specific_client', client=client))
+
     # FETCH DATABASE DATA
     client_obj = Client.query.get(client)
 

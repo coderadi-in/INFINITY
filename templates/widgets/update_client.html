@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/wizard.css') }}">
+
+<section class="center w-full h-screen wizard-container" id="updateClientWizard">
+    <form action="/clients/{{ data.client.id }}/update" method="post" class="form column gap-20 p-20 rounded-16">
+        <span class="link symbol" id="closeWizard">close</span>
+
+        <div class="heading column">
+            <h3 class="h3 uppercase">update {{ data.client.name }}</h3>
+            <p class="para">Update client details below and click save info.</p>
+        </div>
+
+        <div class="input-list column gap-12">
+            <div class="form-elem column gap-4">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="input" value="{{ data.client.name }}" placeholder="{{ data.client.name }}">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="input" value="{{ data.client.email }}" placeholder="{{ data.client.email }}">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" id="phone" class="input" value="{{ data.client.phone }}" placeholder="{{ data.client.phone }}">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="status">Status</label>
+                
+                <select name="status" id="status" class="input">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" class="input" placeholder="{{ data.client.notes }}">{{ data.client.notes }}</textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn fl p-12 rounded-16">
+            <span class="mini uppercase">save info</span>
+        </button>
+    </form>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/base/wizard.js') }}"></script>
