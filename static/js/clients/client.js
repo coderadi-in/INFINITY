@@ -10,7 +10,7 @@ const updateClientWizard = document.getElementById("updateClientWizard");
 const deleteClientWizard = document.getElementById("deleteClientWizard");
 
 // ? IMPORTING FUNCTIONS
-import { toggleWizard } from "../base/wizard.js";
+import { toggleWizard, closeLastOpenedWizard, closeAllWizards } from "../base/wizard.js";
 
 // & EVENT LISTENER FOR UPDATE-CLIENT-BTN CLICK
 if (updateClientBtn) {
@@ -25,3 +25,16 @@ if (deleteClientBtn) {
         toggleWizard(deleteClientWizard);
     });
 }
+
+// & EVENT LISTENER FOR ESC-PRESS
+document.addEventListener('keydown', (e) => {
+    if (e.key == 'esc') {
+        e.preventDefault();
+        closeLastOpenedWizard();
+    }
+
+    if (e.ctrlKey && e.shiftKey && e.key == "Backspace") {
+        e.preventDefault();
+        closeAllWizards();
+    }
+})

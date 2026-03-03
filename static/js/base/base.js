@@ -4,23 +4,38 @@ export const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // PREVENTS ONLY BROWSER SHORTCUT DEFAULTS, NOT NORMAL TYPING.
 // Returns a cleanup function so callers can remove the listener when needed.
 export const blockKeyboardDefaults = (target = document) => {
-    const shortcutKeys = new Set([
-        "f1", "f2", "f3", "f4", "f5", "f6",
-        "f7", "f8", "f9", "f10", "f11", "f12",
+    const blockedPlainKeys = new Set(["f1", "f5", "f11", "f12"]);
+
+    const blockedCtrlKeys = new Set([
+        "l", // focus address bar
+        "r", // reload
+        "t", // new tab
+        "w", // close tab
+        "n", // new window
+        "esc" // opens windows search
     ]);
 
-    const isBrowserShortcut = (event) => {
+    const isBlockedBrowserShortcut = (event) => {
         const key = event.key.toLowerCase();
+        const hasCtrl = event.ctrlKey || event.metaKey;
 
-        // Browser shortcuts are usually modifier combos (Ctrl/Cmd/Alt + key)
-        // or function keys used by the browser (F1-F12).
-        return event.ctrlKey || event.metaKey || event.altKey || shortcutKeys.has(key);
+        if (blockedPlainKeys.has(key)) return true;
+
+        if (hasCtrl && !event.shiftKey && !event.altKey) {
+            return blockedCtrlKeys.has(key);
+        }
+
+        if (hasCtrl && event.shiftKey) {
+            if (key === "t") return true; // reopen last closed tab
+            if (key === "r") return true; // hard reload
+            if (key === "i" || key === "j" || key === "c") return true; // dev tools
+        }
+
+        return false;
     };
 
     const preventShortcutDefault = (event) => {
-        if (isBrowserShortcut(event)) {
-            event.preventDefault();
-        }
+        if (isBlockedBrowserShortcut(event)) event.preventDefault();
     };
 
     // Keydown is enough to stop shortcut defaults before browser actions run.

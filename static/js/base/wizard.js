@@ -47,13 +47,41 @@ function isMatchingShortcut(event, shortcut) {
 }
 
 // * FUNCTION TO TOGGLE WIZARD BY ID
-function toggleWizardById(id) {
-    const targetWizard = document.getElementById(id);
+export function toggleWizardById(id) {
+    let targetWizard = document.getElementById(id);
     if (targetWizard) {targetWizard.classList.toggle("open");}
+}
+
+// * FUNCTION TO CLOSE WIZARD BY ID
+export function closeAllWizards() {
+    let allOpenedWizards = document.querySelectorAll(".wizard-container.open");
+    if (allOpenedWizards.length <= 0) {return;}
+
+    allOpenedWizards.forEach((wizard) => {
+        wizard.classList.remove('open');
+    })
+}
+
+// * FUNCTION TO CLOSE ONLY THE LAST OPENED WIZARD
+// Finds all currently open wizard containers and closes the most recent one.
+export function closeLastOpenedWizard() {
+    const openWizards = document.querySelectorAll(".wizard-container.open");
+    const lastOpenedWizard = openWizards[openWizards.length - 1];
+
+    if (!lastOpenedWizard) {
+        return;
+    }
+
+    lastOpenedWizard.classList.remove("open");
 }
 
 // & HANDLE ALL WIZARD SHORTCUTS
 document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeLastOpenedWizard();
+        return;
+    }
+
     const matchedShortcut = wizardShortcuts.find((shortcut) => isMatchingShortcut(event, shortcut));
 
     if (matchedShortcut) {
