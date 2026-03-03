@@ -1,0 +1,18 @@
+// ==================================================
+// IMPORTS
+// ==================================================
+
+import { toggleWizard } from '../base/wizard.js';
+
+// ==================================================
+// WIZARD OPEN/CLOSE SYSTEM
+// ==================================================
+
+// ? GETTING DOC ELEMENTS
+const addClientBtn = document.getElementById("addClientBtn");
+const clientWizard = document.getElementById("clientWizard");
+
+// & EVENT LISTENER TO OPEN ADD-CLIENT WIZARD
+addClientBtn.addEventListener('click', () => {
+    toggleWizard(clientWizard);
+})

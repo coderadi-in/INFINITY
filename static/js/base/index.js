@@ -2,7 +2,7 @@
 // IMPORTS
 // ==================================================
 
-import { wait } from '../js/.base.js';
+import { wait } from '../base/base.js';
 
 // ==================================================
 // SIGNUP/LOGIN TRANSITION

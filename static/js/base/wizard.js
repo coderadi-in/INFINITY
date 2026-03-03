@@ -12,7 +12,7 @@ const closeBtn = document.getElementById("closeWizard");
 const wizard = document.querySelector(".wizard-container");
 
 // * FUNCTION TO TOGGLE WIZARD
-function toggleWizard() {
+export function toggleWizard(wizard) {
     if (!wizard) {
         return;
     }
@@ -22,7 +22,7 @@ function toggleWizard() {
 
 // & EVENT LISTENER TO CLOSE WIZARD
 if (closeBtn) {
-    closeBtn.addEventListener("click", toggleWizard);
+    closeBtn.addEventListener("click", () => {toggleWizard(wizard)});
 }
 
 // & SHORTCUT: CTRL + ALT + N TO TOGGLE WIZARD
@@ -31,6 +31,6 @@ document.addEventListener("keydown", (event) => {
     const isShortcut = event.ctrlKey && event.altKey && event.key.toLowerCase() === "n";
 
     if (isShortcut) {
-        toggleWizard();
+        toggleWizard(wizard);
     }
 });
