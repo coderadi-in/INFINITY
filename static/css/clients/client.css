@@ -9,7 +9,10 @@
 /* CONTROLS ROW */
 /* ================================================== */
 
-.controls-row .btn { width: 230px; }
+.controls-row .btn {
+    min-width: 190px;
+    max-width: 230px;
+}
 
 /* ================================================== */
 /* INFO ROW */
