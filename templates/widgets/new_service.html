@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/wizard.css') }}">
+
+<section class="center w-full h-screen wizard-container" id="newServiceWizard">
+    <form action="/clients/{{ data.client.id }}/services/new" method="post" class="form column gap-20 p-20 rounded-16">
+        <span class="link symbol" id="closeWizard">close</span>
+
+        <div class="heading column">
+            <h3 class="h3 uppercase">new service</h3>
+            <p class="para">Add service details below to add new service</p>
+        </div>
+
+        <div class="input-list column gap-12">
+            <input type="hidden" name="client" value="{{ data.client.id }}">
+
+            <div class="form-elem column gap-4">
+                <label for="title">Title*</label>
+                <input required type="text" name="title" id="title" class="input" placeholder="e.g.: Hosting">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="category">Category*</label>
+                <select required name="category" id="category" class="input">
+                    <option value="" selected disabled>Select category</option>
+                    <option value="recurring">Recurring</option>
+                    <option value="one_time">One-time</option>
+                </select>
+            </div>
+
+            <div class="form-elem column gap-4" id="billing_cycle_input">
+                <label for="billing_cycle">Billing cycle</label>
+                <select name="billing_cycle" id="billing_cycle" class="input">
+                    <option value="">Select billing cycle</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="half-yearly">Half yearly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="amount">Amount*</label>
+                <input required type="number" name="amount" id="amount" class="input" placeholder="e.g.: 49.99" step="0.01" min="0">
+            </div>
+        </div>
+
+        <button type="submit" class="btn fl p-12 rounded-16">
+            <span class="mini uppercase">add service</span>
+        </button>
+    </form>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/base/wizard.js') }}"></script>
+
+
+<script>
+    function shouldShowBillingCycle(categoryValue) {
+        return categoryValue === "recurring";
+    }
+
+    function setBillingCycleVisibility(categoryInput, billingCycleWrapper, billingCycleInput) {
+        const showBillingCycle = shouldShowBillingCycle(categoryInput.value);
+
+        billingCycleWrapper.style.display = showBillingCycle ? "flex" : "none";
+        billingCycleInput.required = showBillingCycle;
+
+        if (!showBillingCycle) {
+            billingCycleInput.value = "";
+        }
+    }
+
+    function initBillingCycleToggle() {
+        const categoryInput = document.getElementById("category");
+        const billingCycleWrapper = document.getElementById("billing_cycle_input");
+        const billingCycleInput = document.getElementById("billing_cycle");
+
+        if (!categoryInput || !billingCycleWrapper || !billingCycleInput) {
+            return;
+        }
+
+        setBillingCycleVisibility(categoryInput, billingCycleWrapper, billingCycleInput);
+
+        categoryInput.addEventListener("change", function () {
+            setBillingCycleVisibility(categoryInput, billingCycleWrapper, billingCycleInput);
+        });
+    }
+
+    initBillingCycleToggle();
+</script>

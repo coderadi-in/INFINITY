@@ -16,6 +16,7 @@
     {% include 'components/msg.html' %}
     {% include 'widgets/update_client.html' %}
     {% include 'widgets/delete_client.html' %}
+    {% include 'widgets/new_service.html' %}
 
     <main class="main">
         {% include 'components/sidebar.html' %}
@@ -28,12 +29,15 @@
                     <div class="client_credentials row gap-12">
                         <h2 class="h2">{{ data.client.name }}</h2>
                         <span class="text">&bull;</span>
-                        <span class="text uppercase ph-8 pv-4 rounded-4 {{ data.client.status }}">{{ data.client.status }}</span>
+                        <span class="text uppercase ph-8 pv-4 rounded-4 {{ data.client.status }}">{{ data.client.status
+                            }}</span>
                     </div>
 
                     <ul class="list row gap-12">
-                        <li><button class="btn" id="updateClientBtn"><span class="symbol fl-icon">border_color</span></button></li>
-                        <li><button class="btn" id="deleteClientBtn"><span class="symbol fl-icon">delete</span></button></li>
+                        <li><button class="btn" id="updateClientBtn"><span
+                                    class="symbol fl-icon">border_color</span></button></li>
+                        <li><button class="btn" id="deleteClientBtn"><span class="symbol fl-icon">delete</span></button>
+                        </li>
                     </ul>
                 </div>
 
@@ -57,7 +61,7 @@
                             <span class="mini uppercase text-muted">next renewal</span>
                             <h1 class="h1">{{ data.payments.next_bill }}</h1>
                         </div>
-                        
+
                         <hr class="divider">
 
                         <div class="total-bill">
@@ -75,11 +79,22 @@
 
                     <div class="provided-services column gap-20 w-full p-20 rounded-16">
                         <div class="head column gap-12">
-                            <h3 class="h3">Provided services</h3>
+                            <div class="res-row h-sb gap-12">
+                                <h3 class="h3">Provided services</h3>
+
+                                <ul class="list row gap-8">
+                                    <li><span class="link symbol" id="newServiceBtn">add</span></li>
+
+                                    <li><a href="/clients/{{ data.client.id }}/services/" class="link">
+                                            <span class="symbol">expand_content</span>
+                                        </a></li>
+                                </ul>
+                            </div>
                             <hr class="divider">
                         </div>
 
-                        {% for service in data.services %}
+                        <div class="body column gap-12">
+                            {% for service in data.services %}
                             <div class="service-info column gap-8">
                                 <div class="content column">
                                     <span class="mini uppercase text-muted">{{ service.type }}</span>
@@ -88,7 +103,8 @@
                                 </div>
                                 <hr class="divider">
                             </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
 
@@ -109,11 +125,14 @@
 
                         <tbody class="w-full">
                             {% for transaction in data.transactions %}
-                                <tr class="grid cols-3 p-12">
-                                    <td class="flex"><span class="text text-left w-full">{{ transaction.paid_on }}</span></td>
-                                    <td class="flex"><span class="text text-center w-full">{{ transaction.amount }}</span></td>
-                                    <td class="flex"><span class="text text-right w-full">{{ transaction.method }}</span></td>
-                                </tr>
+                            <tr class="grid cols-3 p-12">
+                                <td class="flex"><span class="text text-left w-full">{{ transaction.paid_on }}</span>
+                                </td>
+                                <td class="flex"><span class="text text-center w-full">{{ transaction.amount }}</span>
+                                </td>
+                                <td class="flex"><span class="text text-right w-full">{{ transaction.method }}</span>
+                                </td>
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>

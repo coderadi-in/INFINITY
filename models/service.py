@@ -11,7 +11,7 @@ class Service(db.Model):
         id (int): Primary key for the service record.
         client_id (int): Foreign key referencing `client.id`.
         title (str): Service title or short label.
-        type (str): Service type, either "recurring" or "one_time".
+        category (str): Service type, either "recurring" or "one_time".
         amount (Decimal): Billed amount for this service.
         billing_cycle (str | None): Optional cycle, "monthly" or "yearly".
         next_renewal_date (date | None): Optional next renewal date.
@@ -25,7 +25,7 @@ class Service(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     client_id = db.Column(db.Integer, db.ForeignKey("client.id"), nullable=False)
     title = db.Column(db.String(255), nullable=False)
-    type = db.Column(db.String(20), nullable=False)
+    category = db.Column(db.String(20), nullable=False)
     amount = db.Column(db.Numeric(10, 2), nullable=False)
     billing_cycle = db.Column(db.String(20))
     next_renewal_date = db.Column(db.Date)

@@ -1,16 +1,26 @@
 // ==================================================
-// UPDATE CLIENT OPEN/CLOSE SYSTEM
+// CONSTANT DEFINITION
 // ==================================================
 
 // ? GETTING DOC ELEMENTS
 const updateClientBtn = document.getElementById("updateClientBtn");
 const deleteClientBtn = document.getElementById("deleteClientBtn");
+const newServiceBtn = document.getElementById("newServiceBtn");
 
 const updateClientWizard = document.getElementById("updateClientWizard");
 const deleteClientWizard = document.getElementById("deleteClientWizard");
+const newServiceWizard = document.getElementById("newService");
+
+// ==================================================
+// IMPORTS
+// ==================================================
 
 // ? IMPORTING FUNCTIONS
 import { toggleWizard, closeLastOpenedWizard, closeAllWizards } from "../base/wizard.js";
+
+// ==================================================
+// MOUSE EVENT LISTENERS
+// ==================================================
 
 // & EVENT LISTENER FOR UPDATE-CLIENT-BTN CLICK
 if (updateClientBtn) {
@@ -25,6 +35,17 @@ if (deleteClientBtn) {
         toggleWizard(deleteClientWizard);
     });
 }
+
+// & EVENT LISTENER FOR NEW-SERVICE-BTN CLICK
+if (newServiceBtn) {
+    newServiceBtn.addEventListener('click', () => {
+        toggleWizard(newServiceWizard);
+    })
+}
+
+// ==================================================
+// KEYBOARD EVENT LISTENERS
+// ==================================================
 
 // & EVENT LISTENER FOR ESC-PRESS
 document.addEventListener('keydown', (e) => {

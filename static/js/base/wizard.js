@@ -9,9 +9,10 @@ blockKeyboardDefaults();
 // ==================================================
 
 const wizardShortcuts = [
-    { ctrl: true, alt: true, key: "n", targetId: "newClientWizard" },
-    { ctrl: true, alt: true, key: "u", targetId: "updateClientWizard" },
-    { ctrl: true, alt: true, key: "d", targetId: "deleteClientWizard" },
+    { ctrl: true, shift: false, alt: true, key: "n", targetId: "newClientWizard" },
+    { ctrl: true, shift: false, alt: true, key: "u", targetId: "updateClientWizard" },
+    { ctrl: true, shift: false, alt: true, key: "d", targetId: "deleteClientWizard" },
+    { ctrl: false, shift: true, alt: true, key: "n", targetId: "newServiceWizard" },
 ];
 
 // ==================================================
@@ -42,6 +43,7 @@ function isMatchingShortcut(event, shortcut) {
     return (
         event.ctrlKey === !!shortcut.ctrl &&
         event.altKey === !!shortcut.alt &&
+        event.shiftKey === !!shortcut.shift &&
         event.key.toLowerCase() === shortcut.key.toLowerCase()
     );
 }
@@ -85,6 +87,7 @@ document.addEventListener("keydown", (event) => {
     const matchedShortcut = wizardShortcuts.find((shortcut) => isMatchingShortcut(event, shortcut));
 
     if (matchedShortcut) {
+        event.preventDefault();
         toggleWizardById(matchedShortcut.targetId);
     }
 });

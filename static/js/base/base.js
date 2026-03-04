@@ -28,6 +28,7 @@ export const blockKeyboardDefaults = (target = document) => {
         if (hasCtrl && event.shiftKey) {
             if (key === "t") return true; // reopen last closed tab
             if (key === "r") return true; // hard reload
+            if (key === "n") return true; // incognito tab
             if (key === "i" || key === "j" || key === "c") return true; // dev tools
         }
 

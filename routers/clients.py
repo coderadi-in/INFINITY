@@ -1,13 +1,35 @@
 '''coderadi &bull; Clients navigation routes management file for the Project.'''
 
+# ==================================================
+# INITIALIZATION
+# ==================================================
+
 # ? IMPORTS
 from datetime import date
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, Response
 from plugins import *
 from models import *
 
 # ! INITIALIZATIONS
 clients = Blueprint("clients", __name__, url_prefix='/clients')
+
+# ==================================================
+# FUNCTIONS
+# ==================================================
+
+# * FUNCTION TO CHECK IF CLIENT OBJ IS INTEGRATE TO CURRENT USER
+def validated_client(client_obj) -> bool:
+    if (
+        (not client_obj) or
+        (client_obj.user_id != current_user.id)
+    ):
+        False
+    
+    return True
+
+# ==================================================
+# CLIENTS MANAGEMENT ROUTES
+# ==================================================
 
 # & ALL CLIENTS ROUTE
 @clients.route('/')
@@ -21,16 +43,10 @@ def all_clients():
 @clients.route('/<client>/')
 @login_required
 def specific_client(client):
-    # FETCH DATABASE DATA
+    # CLIENT VALIDATION
     client_obj = Client.query.get(client)
-
-    # VALIDATION
-    if (not client_obj):
-        flash("There is not client integrated to this INFINITY account.", "error")
-        return redirect(url_for('clients.all_clients'))
-    
-    if (client_obj.user_id != current_user.id):
-        flash("There is not client integrated to this INFINITY account.", "error")
+    if (not validated_client(client_obj)):
+        flash("There's not client integrated to this INFINITY account.")
         return redirect(url_for('clients.all_clients'))
 
     # PAYMENT SUMMARY
@@ -79,16 +95,10 @@ def specific_client(client):
 @clients.route('/<client>/update', methods=['POST'])
 @login_required
 def update_client(client):
-    # FETCH DATABASE DATA
+    # CLIENT VALIDATION
     client_obj = Client.query.get(client)
-
-    # VALIDATION
-    if (not client_obj):
-        flash("There is not client integrated to this INFINITY account.", "error")
-        return redirect(url_for('clients.all_clients'))
-    
-    if (client_obj.user_id != current_user.id):
-        flash("There is not client integrated to this INFINITY account.", "error")
+    if (not validated_client(client_obj)):
+        flash("There's not client integrated to this INFINITY account.")
         return redirect(url_for('clients.all_clients'))
 
     # ACCESS FOR DATA
@@ -149,6 +159,12 @@ def new_client():
 @clients.route('/<client>/delete', methods=['POST'])
 @login_required
 def delete_client(client):
+    # CLIENT VALIDATION
+    client_obj = Client.query.get(client)
+    if (not validated_client(client_obj)):
+        flash("There's not client integrated to this INFINITY account.")
+        return redirect(url_for('clients.all_clients'))
+
     # ACCESS FORM DATA
     password_input = request.form.get('password')
 
@@ -156,18 +172,6 @@ def delete_client(client):
     if (not bcrypt.check_password_hash(current_user.password, password_input)):
         flash("The provided password isn't hashed with this INFINITY account.", "error")
         return redirect(url_for('clients.specific_client', client=client))
-
-    # FETCH DATABASE DATA
-    client_obj = Client.query.get(client)
-
-    # VALIDATION
-    if (not client_obj):
-        flash("There is not client integrated to this INFINITY account.", "error")
-        return redirect(url_for('clients.all_clients'))
-    
-    if (client_obj.user_id != current_user.id):
-        flash("There is not client integrated to this INFINITY account.", "error")
-        return redirect(url_for('clients.all_clients'))
 
     # ARCHIVE CLIENT
     client_obj.is_deleted = True
@@ -188,3 +192,65 @@ def delete_client(client):
     db.session.commit()
     flash("The client and related records have been archived.", "check_circle")
     return redirect(url_for('clients.all_clients'))
+
+# ==================================================
+# CLIENT SERVICES MANAGEMENT ROUTES
+# ==================================================
+
+# & ALL SERVICES ROUTE
+@clients.route('/<client>/services')
+def all_services(client):
+    # CLIENT VALIDATION
+    client_obj = Client.query.get(client)
+    if (not validated_client(client_obj)):
+        flash("There's not client integrated to this INFINITY account.")
+        return redirect(url_for('clients.all_clients'))
+    
+    # FETCH SERVICES DATA
+    service_obj_list = Service.query.filter_by(client_id=client).all()
+
+    # RETURN RESPONSE
+    return render_template('clients/services.html', data={
+        'services': service_obj_list
+    })
+
+# & NEW SERVICE ROUTE
+@clients.route('/<client>/services/new', methods=['POST'])
+def new_service(client):
+    # CLIENT VALIDATION
+    client_obj = Client.query.get(client)
+    if (not validated_client(client_obj)):
+        flash("There's not client integrated to this INFINITY account.")
+        return redirect(url_for('clients.all_clients'))
+    
+    # ACCESS FORM DATA
+    title = request.form.get('title')
+    category = request.form.get('category')
+    billing_cycle = request.form.get('billing_cycle')
+    amount = request.form.get('amount')
+
+    # VALIDATION
+    if (
+        (not title) or
+        (not category) or
+        (not amount)
+    ):
+        flash("Some of the required inputs aren't provided properly.", "error")
+        return redirect(url_for('clients.specific_client', client=client))
+    
+    # CREATE NEW SERVICE OBJECT
+    new_service_obj = Service(
+        client_id=client,
+        title=title,
+        category=category,
+        billing_cycle=billing_cycle,
+        amount=amount
+    )
+
+    # SAVE NEW SERVICE OBJECT
+    db.session.add(new_service_obj)
+    db.session.commit()
+
+    # REDIRECT USER
+    flash("The new service has been saved.", "check_circle")
+    return redirect(url_for('clients.specific_client', client=client))

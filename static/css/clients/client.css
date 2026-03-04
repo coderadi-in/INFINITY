@@ -18,12 +18,11 @@
 /* INFO ROW */
 /* ================================================== */
 
-.info-row {
-    height: 50%;
-    overflow: scroll;
-}
+.info-row { height: 50%; }
+.info-row .client-info .notes { overflow: scroll; }
 
 .info-row .provided-services { background-color: var(--surface); }
+.info-row .provided-services .body { overflow: scroll; }
 
 /* ================================================== */
 /* PAYMENTS ROW */
