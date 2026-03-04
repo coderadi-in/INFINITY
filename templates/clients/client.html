@@ -17,6 +17,8 @@
     {% include 'widgets/update_client.html' %}
     {% include 'widgets/delete_client.html' %}
     {% include 'widgets/new_service.html' %}
+    {% include 'widgets/update_service.html' %}
+    {% include 'widgets/delete_service.html' %}
 
     <main class="main">
         {% include 'components/sidebar.html' %}
@@ -95,14 +97,31 @@
 
                         <div class="body column gap-12">
                             {% for service in data.services %}
+                            {% if not service.is_deleted %}
                             <div class="service-info column gap-8">
-                                <div class="content column">
-                                    <span class="mini uppercase text-muted">{{ service.type }}</span>
-                                    <h2 class="h2">{{ service.title }}</h2>
-                                    <span class="text">{{ service.amount }}</span>
+                                <div class="res-row h-sb gap-12 v-en">
+                                    <div class="content column">
+                                        <span class="mini uppercase text-muted">{{ service.category }}</span>
+                                        <h2 class="h2">{{ service.title }}</h2>
+                                        <span class="text">{{ service.amount }}</span>
+                                    </div>
+
+                                    <div class="service-controls row gap-8">
+                                        <span class="link symbol fl-icon update-service-btn"
+                                            data-service-id="{{ service.id }}"
+                                            data-service-title="{{ service.title | e }}"
+                                            data-service-category="{{ service.category | e }}"
+                                            data-service-billing-cycle="{{ (service.billing_cycle or '') | e }}"
+                                            data-service-amount="{{ service.amount }}">border_color</span>
+
+                                        <span class="link symbol fl-icon delete-service-btn"
+                                            data-service-id="{{ service.id }}"
+                                            data-service-title="{{ service.title | e }}">delete</span>
+                                    </div>
                                 </div>
                                 <hr class="divider">
                             </div>
+                            {% endif %}
                             {% endfor %}
                         </div>
                     </div>

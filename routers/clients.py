@@ -198,7 +198,7 @@ def delete_client(client):
 # ==================================================
 
 # & ALL SERVICES ROUTE
-@clients.route('/<client>/services')
+@clients.route('/<client>/services/')
 def all_services(client):
     # CLIENT VALIDATION
     client_obj = Client.query.get(client)
@@ -211,7 +211,8 @@ def all_services(client):
 
     # RETURN RESPONSE
     return render_template('clients/services.html', data={
-        'services': service_obj_list
+        'client': client_obj,
+        'services': service_obj_list,
     })
 
 # & NEW SERVICE ROUTE
@@ -253,4 +254,86 @@ def new_service(client):
 
     # REDIRECT USER
     flash("The new service has been saved.", "check_circle")
+    return redirect(url_for('clients.specific_client', client=client))
+
+# & UPDATE SERVICE ROUTE
+@clients.route('/<client>/services/<service>/update', methods=['POST'])
+@login_required
+def update_service(client, service):
+    # CLIENT VALIDATION
+    client_obj = Client.query.get(client)
+    if (not validated_client(client_obj)):
+        flash("There's not client integrated to this INFINITY account.")
+        return redirect(url_for('clients.all_clients'))
+
+    # SERVICE VALIDATION
+    service_obj = Service.query.get(service)
+    if (
+        (not service_obj) or
+        (service_obj.client_id != client_obj.id) or
+        (service_obj.is_deleted)
+    ):
+        flash("The selected service isn't valid for this client.", "error")
+        return redirect(url_for('clients.specific_client', client=client))
+
+    # ACCESS FORM DATA
+    title = request.form.get('title', service_obj.title)
+    category = request.form.get('category', service_obj.category)
+    billing_cycle = request.form.get('billing_cycle', service_obj.billing_cycle)
+    amount = request.form.get('amount', service_obj.amount)
+
+    # VALIDATION
+    if (
+        (not title) or
+        (not category) or
+        (not amount)
+    ):
+        flash("Some of the required inputs aren't provided properly.", "error")
+        return redirect(url_for('clients.specific_client', client=client))
+
+    if (category != "recurring"):
+        billing_cycle = None
+
+    # SAVE UPDATED DATA
+    service_obj.title = title
+    service_obj.category = category
+    service_obj.billing_cycle = billing_cycle
+    service_obj.amount = amount
+
+    # UPDATE DATABASE & REDIRECT
+    db.session.commit()
+    flash("The service info has been changed.", "check_circle")
+    return redirect(url_for('clients.specific_client', client=client))
+
+# & DELETE SERVICE ROUTE
+@clients.route('/<client>/services/<service>/delete')
+@login_required
+def delete_service(client, service):
+    # CLIENT VALIDATION
+    client_obj = Client.query.get(client)
+    if (not validated_client(client_obj)):
+        flash("There's not client integrated to this INFINITY account.")
+        return redirect(url_for('clients.all_clients'))
+
+    # SERVICE VALIDATION
+    service_obj = Service.query.get(service)
+    if (
+        (not service_obj) or
+        (service_obj.client_id != client_obj.id) or
+        (service_obj.is_deleted)
+    ):
+        flash("The selected service isn't valid for this client.", "error")
+        return redirect(url_for('clients.specific_client', client=client))
+
+    # ARCHIVE SERVICE
+    service_obj.is_deleted = True
+
+    # ARCHIVE RELATED PAYMENTS
+    payments_obj = Payment.query.filter_by(service_id=service_obj.id).all()
+    for payment_obj in payments_obj:
+        payment_obj.is_deleted = True
+
+    # UPDATE DATABASE & REDIRECT
+    db.session.commit()
+    flash("The service and related payments have been archived.", "check_circle")
     return redirect(url_for('clients.specific_client', client=client))

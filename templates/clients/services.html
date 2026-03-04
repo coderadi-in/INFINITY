@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>SERVICES &bull; {{ data.client.name }}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clients/services.css') }}">
+</head>
+
+<body>
+    {% include 'components/msg.html' %}
+    {% include 'widgets/new_service.html' %}
+
+    <main class="main">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content">
+            {% include 'components/header.html' %}
+
+            <section class="app-body column gap-20">
+                
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>
