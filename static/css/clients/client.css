@@ -2,6 +2,7 @@
 /* TOP ROW */
 /* ================================================== */
 
+.top-row { height: 10%; }
 .top-row .active { background-color: var(--accent-green); }
 .top-row .inactive { background-color: var(--accent-red); }
 
@@ -9,6 +10,7 @@
 /* CONTROLS ROW */
 /* ================================================== */
 
+.controls-row { height: 10%; }
 .controls-row .btn {
     min-width: 190px;
     max-width: 230px;
@@ -28,5 +30,6 @@
 /* PAYMENTS ROW */
 /* ================================================== */
 
+.payments-row { height: 30%; }
 .payments-table { overflow: scroll; }
 .payments-table tr { background-color: var(--surface); }

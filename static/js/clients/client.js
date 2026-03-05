@@ -6,12 +6,14 @@
 const updateClientBtn = document.getElementById("updateClientBtn");
 const deleteClientBtn = document.getElementById("deleteClientBtn");
 const newServiceBtn = document.getElementById("newServiceBtn");
+const newPaymentBtn = document.getElementById("newPaymentBtn");
 
 const updateClientWizard = document.getElementById("updateClientWizard");
 const deleteClientWizard = document.getElementById("deleteClientWizard");
 const newServiceWizard = document.getElementById("newServiceWizard");
 const updateServiceWizard = document.getElementById("updateServiceWizard");
 const deleteServiceWizard = document.getElementById("deleteServiceWizard");
+const newPaymentWizard = document.getElementById("newPaymentWizard");
 
 const updateServiceForm = document.getElementById("updateServiceForm");
 const updateServiceTitleInput = document.getElementById("update_service_title");
@@ -217,6 +219,13 @@ if (deleteClientBtn) {
 if (newServiceBtn) {
     newServiceBtn.addEventListener('click', () => {
         toggleWizard(newServiceWizard);
+    })
+}
+
+// & EVENT LISTENER FOR NEW-PAYMENT-BTN CLICK
+if (newPaymentBtn) {
+    newPaymentBtn.addEventListener('click', () => {
+        toggleWizard(newPaymentWizard);
     })
 }
 

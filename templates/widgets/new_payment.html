@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/wizard.css') }}">
+
+<section class="center w-full h-screen wizard-container" id="newPaymentWizard">
+    <form action="/payments/new/?client={{ data.client.id }}" method="post" class="form column gap-20 p-20 rounded-16">
+        <span class="link symbol" id="closeWizard">close</span>
+        <h1 class="h1">New payment</h1>
+
+        <div class="input-lists column gap-12">
+            <div class="form-elem column gap-4">
+                <label for="service_id">Service*</label>
+                <select required name="service_id" id="service_id" class="input">
+                    {% for service in data.services %}
+                    {% if not service.is_deleted %}
+                    <option value="{{ service.id }}">{{ service.title }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="amount">Amount*</label>
+                <input required type="number" name="amount" id="amount" class="input" placeholder="e.g.: 699">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="paid_on">Paid on</label>
+                <input type="date" name="paid_on" id="paid_on" class="input">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="method">Method</label>
+                <select name="method" id="method" class="input">
+                    <option value="upi">UPI</option>
+                    <option value="bank">Bank transfer</option>
+                    <option value="cash">Cash</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="status">Status*</label>
+                <select required name="status" id="status" class="input">
+                    <option value="paid">Paid</option>
+                    <option value="pending">Pending</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn fl p-12 rounded-16">
+            <span class="mini title">add payment</span>
+        </button>
+    </form>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/base/wizard.js') }}"></script>
