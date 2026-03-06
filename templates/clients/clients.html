@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <table class="clients-table column gap-12">
+                <table class="clients-table column gap-8">
                     <thead class="w-full">
                         <tr class="grid cols-3 p-12">
                             <th class="flex"><span class="text uppercase text-left w-full">name</span></th>
@@ -42,7 +42,7 @@
                         </tr>
                     </thead>
 
-                    <tbody class="w-full">
+                    <tbody class="w-full column gap-8">
                         {% for client in data.clients %}
                         {% if not client.is_deleted %}
                         <tr class="grid cols-3 p-12">

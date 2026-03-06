@@ -20,6 +20,8 @@
     {% include 'widgets/update_service.html' %}
     {% include 'widgets/delete_service.html' %}
     {% include 'widgets/new_payment.html' %}
+    {% include 'widgets/update_payments.html' %}
+    {% include 'widgets/delete_payment.html' %}
 
     <main class="main">
         {% include 'components/sidebar.html' %}
@@ -134,28 +136,46 @@
                         <hr class="divider w-full">
                     </div>
 
-                    <table class="payments-table column gap-8">
-                        <thead class="w-full">
-                            <tr class="grid cols-3 p-12">
-                                <th class="flex"><span class="text uppercase text-left w-full">date</span></th>
-                                <th class="flex"><span class="text uppercase text-center w-full">amount</span></th>
-                                <th class="flex"><span class="text uppercase text-right w-full">method</span></th>
-                            </tr>
-                        </thead>
+                    <div class="payments-table column gap-8">
+                        <div class="w-full">
+                            <div class="table-row grid cols-3 p-12">
+                                <span class="text uppercase text-left w-full">date</span>
+                                <span class="text uppercase text-center w-full">amount</span>
+                                <span class="text uppercase text-right w-full">method</span>
+                            </div>
+                        </div>
 
-                        <tbody class="w-full column gap-8">
+                        <div class="w-full column gap-8">
                             {% for transaction in data.transactions %}
-                            <tr class="grid cols-3 p-12">
-                                <td class="flex"><span class="text text-left w-full">{{ transaction.paid_on }}</span>
-                                </td>
-                                <td class="flex"><span class="text text-center w-full">{{ transaction.amount }}</span>
-                                </td>
-                                <td class="flex"><span class="text text-right w-full">{{ transaction.method }}</span>
-                                </td>
-                            </tr>
+                            <div class="table-row grid cols-3 p-12">
+                                <span class="text text-left w-full">{{ transaction.paid_on }}</span>
+                                <span class="text text-center w-full">{{ transaction.amount }}</span>
+                                <div class="flex gap-8">
+                                    <span class="text text-right w-full">{{ transaction.method }}</span>
+                                    <span class="link symbol fl-icon open-payments-management-wizard">more_vert</span>
+                                </div>
+
+                                <div class="management-row row gap-12 p-12">
+                                    <span class="link symbol fl-icon close-payment-actions">close</span>
+                                    <span>|</span>
+                                    <span class="link symbol fl-icon update-payment-btn"
+                                        data-payment-id="{{ transaction.id }}"
+                                        data-client-id="{{ data.client.id }}"
+                                        data-service-id="{{ transaction.service_id }}"
+                                        data-amount="{{ transaction.amount }}"
+                                        data-paid-on="{{ transaction.paid_on.isoformat() if transaction.paid_on else '' }}"
+                                        data-method="{% if transaction.method == 'UPI' %}upi{% elif transaction.method == 'BANK TRANSFER' %}bank{% elif transaction.method == 'CASH' %}cash{% else %}other{% endif %}"
+                                        data-status="{{ (transaction.status or 'pending') | lower }}">border_color</span>
+                                    <span>|</span>
+                                    <span class="link symbol fl-icon delete-payment-btn"
+                                        id="deletePaymentBtn"
+                                        data-payment-id="{{ transaction.id }}"
+                                        data-payment-title="{{ (transaction.amount|string) | e }}">delete</span>
+                                </div>
+                            </div>
                             {% endfor %}
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </section>
         </section>

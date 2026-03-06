@@ -32,4 +32,28 @@
 
 .payments-row { height: 30%; }
 .payments-table { overflow: scroll; }
-.payments-table tr { background-color: var(--surface); }
+.payments-table .table-row {
+    background-color: var(--surface);
+    position: relative;
+}
+
+.payments-table .management-row {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--surface-alt-2);
+    
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 
+        transform 0.4s ease-in-out,
+        opacity 0.4s ease-in-out;
+}
+
+.payments-table .management-row.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: all;
+}
