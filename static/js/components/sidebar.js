@@ -6,7 +6,7 @@ const sidebar = document.querySelector(".sidebar");
 const mainLayout = document.querySelector(".main");
 const appContent = document.querySelector(".app-content");
 const sidebarElements = document.querySelectorAll(".sidebar .elem");
-const closeSidebar = document.querySelector("#closeSidebar");
+const closeSidebarBtn = document.querySelector("#closeSidebarBtn");
 
 // ADD INCREASING TRANSITION DELAY TO EACH SIDEBAR ELEMENT
 const BASE_DELAY = 0.3; // Base delay in seconds
@@ -47,8 +47,8 @@ const initSidebarToggle = () => {
         return;
     }
 
-    if (closeSidebar) {
-        closeSidebar.addEventListener("click", hideSidebar);
+    if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener("click", hideSidebar);
     }
 
     document.addEventListener("sidebar:open", showSidebar);

@@ -9,10 +9,7 @@ const openSidebarPanel = () => {
 };
 
 const initSidebarOpen = () => {
-    if (!openSidebar) {
-        return;
-    }
-
+    if (!openSidebar) {return;}
     openSidebar.addEventListener("click", openSidebarPanel);
 };
 

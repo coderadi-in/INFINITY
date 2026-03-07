@@ -168,7 +168,6 @@
                                         data-status="{{ (transaction.status or 'pending') | lower }}">border_color</span>
                                     <span>|</span>
                                     <span class="link symbol fl-icon delete-payment-btn"
-                                        id="deletePaymentBtn"
                                         data-payment-id="{{ transaction.id }}"
                                         data-payment-title="{{ (transaction.amount|string) | e }}">delete</span>
                                 </div>

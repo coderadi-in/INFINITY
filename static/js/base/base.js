@@ -1,10 +1,22 @@
-// ADDS A SIMPLE WAIT FUNCTION TO AVOID CALLBACK HELL IN ANIMATION SEQUENCES
+// * FUNCTION TO CREATE A TIMEOUT
 export const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// PREVENTS ONLY BROWSER SHORTCUT DEFAULTS, NOT NORMAL TYPING.
-// Returns a cleanup function so callers can remove the listener when needed.
+// * FUNCTION TO REDIRECT USER TO ANY PAGE
+export function confirmRedirect(btn) {
+    if (!btn) {return;}
+    const redirectUrl = btn.dataset.redirectUrl;
+    if (!redirectUrl) {return;}
+    window.location.href = redirectUrl;
+}
+
+// * FUNCTION TO GET CLIENT-ID FROM URL PATH
+export function getClientIdFromPath() {
+    return window.location.pathname.split("/")[2] || "";
+}
+
+// * FUNCTION TO BLOCK DEFAULT BROWSER BEHAVIOR
 export const blockKeyboardDefaults = (target = document) => {
-    const blockedPlainKeys = new Set(["f1", "f5", "f11", "f12"]);
+    const blockedPlainKeys = new Set(["f1"]);
 
     const blockedCtrlKeys = new Set([
         "l", // focus address bar
@@ -12,7 +24,6 @@ export const blockKeyboardDefaults = (target = document) => {
         "t", // new tab
         "w", // close tab
         "n", // new window
-        "esc" // opens windows search
     ]);
 
     const isBlockedBrowserShortcut = (event) => {
