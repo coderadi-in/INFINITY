@@ -45,7 +45,7 @@
 
 *::selection {
     background-color: var(--surface-alt);
-    color: var(--text-alt);
+    color: var(--surface);
 }
 
 /* ================================================== */

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>NUMBERS &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/numbers.css') }}">
+</head>
+
+<body>
+    {% include 'components/msg.html' %}
+
+    <main class="main">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content">
+            {% include 'components/header.html' %}
+
+            <section class="app-body column gap-12">
+                <section class="head-row row gap-12">
+                    <h1 class="h1">numbers</h1>
+                    <span class="text">&bull;</span>
+                    <span class="text">All transactions made</span>
+                </section>
+
+                <section class="controls-row row gap-12">
+                    <hr class="divider w-full">
+
+                    <select name="dateRange" id="dateRange" class="input">
+                        <option value="">Date range</option>
+                        <option value="monthly">This month</option>
+                        <option value="quarterly">This quarter</option>
+                        <option value="yearly">This year</option>
+                        <option value="all">All</option>
+                    </select>
+
+                    <select name="paymentType" id="paymentType" class="input">
+                        <option value="">Payment type</option>
+                        <option value="all">All</option>
+                        <option value="expense">Expense</option>
+                        <option value="revenue">Revenue</option>
+                    </select>
+                </section>
+
+                <section class="numbers-row row gap-20 p-16 rounded-16 shadow-sm">
+                    <div class="column gap-4">
+                        <span class="text uppercase text-muted">total revenue</span>
+                        <h1 class="h1" id="totalRevenueDisplay">{{ data.insights.total_revenue }}</h1>
+                    </div>
+
+                    <div class="column gap-4">
+                        <span class="text uppercase text-muted">month to date</span>
+                        <h1 class="h1" id="monthToDateDisplay">{{ data.insights.month_to_date }}</h1>
+                    </div>
+
+                    <div class="column gap-4">
+                        <span class="text uppercase text-muted">average revenue</span>
+                        <h1 class="h1" id="avgRevenueDisplay">{{ data.insights.avg_revenue }}</h1>
+                    </div>
+                </section>
+
+                <table class="numbers-table column gap-8">
+                    <thead class="w-full">
+                        <tr class="grid cols-3 p-12">
+                            <th class="row gap-4">
+                                <span class="text uppercase">Date</span>
+                            </th>
+
+                            <td class="row gap-4 h-center">
+                                <span class="text uppercase text-center">Amount</span>
+                            </td>
+
+                            <td class="row gap-4 h-en">
+                                <span class="text uppercase text-right">Notes</span>
+                            </td>
+                        </tr>
+                    </thead>
+
+                    <tbody class="w-full column gap-8">
+                        {% for transaction in data.transactions %}
+                        <tr class="grid cols-3 p-12">
+                            <td class="row gap-4">
+                                <span class="symbol {{ transaction.symbol }}">{{ transaction.symbol }}</span>
+                                <span class="text">{{ transaction.date }}</span>
+                            </td>
+
+                            <td class="row gap-4 h-center">
+                                <span class="text text-center">{{ transaction.amount }}</span>
+                            </td>
+
+                            <td class="row gap-4 h-en">
+                                <span class="text text-right">{{ transaction.notes }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </section>
+    </main>
+
+    <script type="module" src="{{ url_for('static', filename='js/pages/numbers.js') }}"></script>
+</body>
+
+</html>

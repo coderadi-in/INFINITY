@@ -1,0 +1,17 @@
+/* ================================================== */
+/* NUMBERS ROW */
+/* ================================================== */
+
+.numbers-row {
+    background-color: var(--surface);
+    width: max(50%, 600px);
+}
+
+/* ================================================== */
+/* NUMBERS TABLE */
+/* ================================================== */
+
+.numbers-table tr { background-color: var(--surface); }
+
+.numbers-table .call_received { color: var(--accent-green); }
+.numbers-table .call_made { color: var(--accent-red); }
