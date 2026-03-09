@@ -430,5 +430,18 @@ textarea.input {
 .divider { border: 1px solid var(--border); }
 .divider-l { border: 2px solid var(--border); }
 
+.coming-soon {
+    background-color: var(--border);
+    color: var(--text-alt);
+    cursor: wait;
+    opacity: 0.6;
+}
+
+.coming-soon-alt {
+    color: var(--text-alt);
+    cursor: wait;
+    opacity: 0.6;
+}
+
 .list { list-style-type: none; }
 .no-list { list-style-position: inside; }
