@@ -170,7 +170,79 @@ def settings():
     return render_template('pages/settings.html')
 
 # & ACCOUNT ROUTE
-@app.route('/account/')
+@app.route('/account/', methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('pages/account.html')
+    if (request.method == 'GET'):
+        # VARIABLES DECLARATION
+        # Keep all account metrics scoped to the current calendar year.
+        today_date = date.today()
+        current_year_start = date(today_date.year, 1, 1)
+        total_revenue = 0.0
+        total_expense = 0.0
+        total_clients = Client.query.filter(
+            Client.user_id == current_user.id,
+            Client.is_deleted == False,
+            Client.created_at >= current_year_start
+        ).count()
+
+        # FETCH PAYMENTS FROM DB
+        payments_obj_list = Payment.query.join(Service).join(Client).options(
+            joinedload(Payment.service).joinedload(Service.client)
+        ).filter(
+            Client.user_id == current_user.id,
+            Client.is_deleted == False,
+            Service.is_deleted == False,
+            Payment.is_deleted == False,
+            db.func.coalesce(Payment.paid_on, Payment.created_at) >= current_year_start
+        ).all()
+
+        # FETCH EXPENSES FROM DB
+        expense_obj_list = Expense.query.filter_by(
+            user_id=current_user.id,
+            is_deleted=False
+        ).filter(
+            db.func.coalesce(Expense.paid_on, Expense.created_at) >= current_year_start
+        ).all()
+
+        # CALCULATE TOTAL REVENUE
+        for payment_obj in payments_obj_list:
+            total_revenue += float(payment_obj.amount)
+
+        # CALCULATE TOTAL EXPENSE
+        for expense_obj in expense_obj_list:
+            total_expense += float(expense_obj.amount)
+
+        return render_template('pages/account.html', data={
+            'total_clients': total_clients,
+            'total_revenue': total_revenue,
+            'total_expense': total_expense
+        })
+
+    # ACCESS FORM DATA
+    name = request.form.get('name')
+    email = request.form.get('email')
+
+    # UPDATE DATA
+    current_user.name = name
+    current_user.email = email
+
+    # SAVE & REDIRECT
+    db.session.commit()
+    flash("The account info has been updated.", "check_circle")
+    return redirect(url_for('app.account'))
+
+# & DOCS ROUTE
+@app.route('/docs/')
+def docs():
+    return render_template('docs/main.html')
+
+# & REPORT ROUTE
+@app.route('/report/')
+def report():
+    return render_template('pages/report.html')
+
+# & TRASH ROUTE
+@app.route('/trash/')
+def trash():
+    return render_template('pages/trash.html')

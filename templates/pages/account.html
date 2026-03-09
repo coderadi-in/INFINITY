@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>{{ current_user.name }} &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/account.css') }}">
+<body>
+    {% include 'components/msg.html' %}
+    {% include 'widgets/update_profile.html' %}
+
+    <main class="main">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content">
+            {% include 'components/header.html' %}
+
+            <section class="app-body column gap-12">
+                <a href="/auth/logout" class="link btn icon-fl pv-12 ph-20 rounded-16" id="logoutBtn">
+                    <span class="symbol">logout</span>
+                    <span class="mini uppercase">logout</span>
+                </a>
+
+                <div class="top-row row h-sb">
+                    <h1 class="h1">{{ current_user.name }}</h1>
+                    <span class="link symbol" id="updateProfileBtn">border_color</span>
+                </div>
+
+                <div class="controls-row row gap-12">
+                    <span class="text">{{ current_user.email }}</span>
+                    <hr class="divider w-full">
+                </div>
+
+                <div class="info-row row h-sb p-16 rounded-16 shadow-sm">
+                    <div class="column gap-4">
+                        <span class="mini uppercase text-muted">clients acquisition</span>
+                        <h1 class="h1">{{ data.total_clients }}</h1>
+                    </div>
+                    
+                    <div class="column gap-4">
+                        <span class="mini uppercase text-muted">year to date</span>
+                        <h1 class="h1">{{ data.total_revenue }}</h1>
+                    </div>
+                    
+                    <div class="column gap-4">
+                        <span class="mini uppercase text-muted">expenses</span>
+                        <h1 class="h1">{{ data.total_expense }}</h1>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script type="module" src="{{ url_for('static', filename='js/pages/account.js') }}"></script>
+</body>
+</html>

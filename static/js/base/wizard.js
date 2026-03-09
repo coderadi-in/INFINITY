@@ -15,6 +15,7 @@ const wizardShortcuts = [
     { ctrl: false, shift: true, alt: true, key: "n", targetId: "newServiceWizard" },
     { ctrl: false, shift: true, alt: true, key: "p", targetId: "newPaymentWizard" },
     { ctrl: true, shift: true, alt: false, key: "e", targetId: "newExpenseWizard" },
+    { ctrl: true, shift: true, alt: false, key: "u", targetId: "updateProfileWizard" },
 ];
 
 // ==================================================

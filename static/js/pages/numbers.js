@@ -1,11 +1,4 @@
 // ==================================================
-// BLOCK DEFAULT BROWSER BEHAVIOR
-// ==================================================
-
-import { blockKeyboardDefaults } from '../base/base.js';
-const unblock = blockKeyboardDefaults();
-
-// ==================================================
 // ACCESS ELEMENTS
 // ==================================================
 

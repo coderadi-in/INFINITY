@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/wizard.css') }}">
+
+<section class="center w-full h-screen wizard-container" id="updateProfileWizard">
+    <form action="/account/" method="post" class="form column gap-20 p-20 rounded-16">
+        <span class="link symbol" id="closeWizard">close</span>
+
+        <div class="heading column">
+            <h1 class="h1">update profile</h1>
+            <span class="text">Update your profile info and click save info.</span>
+        </div>
+
+        <div class="input-list column gap-12">
+            <div class="form-elem column gap-4">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="input" value="{{ current_user.name }}" placeholder="{{ current_user.name }}">
+            </div>
+            
+            <div class="form-elem column gap-4">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" class="input" value="{{ current_user.email }}" placeholder="{{ current_user.email }}">
+            </div>
+        </div>
+
+        <button type="submit" class="btn fl p-12 rounded-16">
+            <span class="mini uppercase">save info</span>
+        </button>
+    </form>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/base/wizard.js') }}"></script>

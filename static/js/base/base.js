@@ -24,6 +24,8 @@ export const blockKeyboardDefaults = (target = document) => {
         "t", // new tab
         "w", // close tab
         "n", // new window
+        "u", // page source
+        "w", // search google
     ]);
 
     const isBlockedBrowserShortcut = (event) => {
