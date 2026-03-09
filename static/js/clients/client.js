@@ -59,19 +59,12 @@ const confirmDeletePaymentBtn = document.getElementById("confirmDeletePaymentBtn
 // ==================================================
 
 // ? IMPORTING FUNCTIONS
-import { closeLastOpenedWizard, closeAllWizards, closeWizard, initButtons, addToggleWizardListener, togglePaymentsActionTray } from "../base/wizard.js";
+import { closeLastOpenedWizard, closeAllWizards, closeWizard, initButtons, addToggleWizardListener, addActionTrayEvent, closeActionTray } from "../base/wizard.js";
 import { confirmRedirect, getClientIdFromPath } from "../base/base.js";
 
 // ==================================================
 // FUNCTIONS
 // ==================================================
-
-// * FUNCTION TO CLOSE ACTION TRAY ONCE WIZARD OPENS
-function closeActionTray(btn) {
-    const tableRow = btn.closest(".table-row");
-    const managementRow = tableRow ? tableRow.querySelector(".management-row") : null;
-    if (managementRow) {managementRow.classList.remove("open");}
-}
 
 // * FUNCTION TO TOGGLE BILLING CYCLE FIELD FOR UPDATE-SERVICE WIZARD
 function setUpdateBillingCycleVisibility() {
@@ -177,8 +170,8 @@ addToggleWizardListener(newServiceBtn, newServiceWizard);
 addToggleWizardListener(newPaymentBtn, newPaymentWizard);
 
 // & EVENT LISTENERS TO TOGGLE PAYMENTS ACTION TRAY
-togglePaymentsActionTray(paymentManagementBtns);
-togglePaymentsActionTray(closePaymentsActions);
+addActionTrayEvent(paymentManagementBtns);
+addActionTrayEvent(closePaymentsActions);
 
 // & INITIALIZE MANAGEMENT BUTTONS
 initButtons(updateServiceBtns, updateServiceWizard, fillUpdateServiceForm);

@@ -5,6 +5,7 @@ from .app import app
 from .auth import auth
 from .clients import clients
 from .payments import payments
+from .expenses import expenses
 
 
 def bind_routers(server):
@@ -18,3 +19,4 @@ def bind_routers(server):
     server.register_blueprint(auth)
     server.register_blueprint(clients)
     server.register_blueprint(payments)
+    server.register_blueprint(expenses)

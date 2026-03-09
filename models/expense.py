@@ -30,7 +30,5 @@ class Expense(db.Model):
     amount = db.Column(db.Numeric(10, 2), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     paid_on = db.Column(db.Date, nullable=False)
-    recurring = db.Column(db.Boolean, nullable=False, default=False)
-    recurring_cycle = db.Column(db.String(20))
     is_deleted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.Date, nullable=False, default=db.func.current_date())

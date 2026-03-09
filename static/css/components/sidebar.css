@@ -4,7 +4,7 @@
     width: 300px;
     opacity: 1;
     transform: translateY(0);
-    overflow: hidden;
+    overflow: scroll;
     transition: width 0.3s ease, min-width 0.3s ease, padding 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 

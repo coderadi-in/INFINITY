@@ -82,7 +82,7 @@ def update_payment(payment):
         (payment_obj.is_deleted)
     ):
         flash("The selected payment isn't valid.", "error")
-        if client:
+        if (client):
             return redirect(url_for('clients.specific_client', client=client))
         return redirect(url_for('clients.all_clients'))
 

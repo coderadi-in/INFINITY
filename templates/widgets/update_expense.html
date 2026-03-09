@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/wizard.css') }}">
+
+<section class="center w-full h-screen wizard-container" id="updateExpenseWizard">
+    <form action="" method="post" class="form column gap-20 p-20 rounded-16" id="updateExpenseForm">
+        <span class="link symbol" id="closeWizard">close</span>
+
+        <div class="heading column">
+            <h3 class="h3 uppercase">update expense</h3>
+            <p class="para">Update expense details below and click save info.</p>
+        </div>
+
+        <div class="input-list column gap-12">
+            <div class="form-elem column gap-4">
+                <label for="update_expense_title">Title*</label>
+                <input required type="text" name="title" id="update_expense_title" class="input" placeholder="Server bills">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="update_expense_amount">Amount*</label>
+                <input required type="number" name="amount" id="update_expense_amount" class="input" placeholder="5000" step="0.01" min="0">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="update_expense_category">Category*</label>
+                <input required type="text" name="category" id="update_expense_category" class="input" placeholder="server renewals">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="update_expense_paid_on">Paid on*</label>
+                <input required type="date" name="paid_on" id="update_expense_paid_on" class="input">
+            </div>
+
+            <div class="form-elem column gap-4">
+                <label for="update_expense_desc">Notes</label>
+                <textarea name="desc" id="update_expense_desc" class="input" placeholder="Expense notes (optional)"></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn fl p-12 rounded-16">
+            <span class="mini uppercase">save info</span>
+        </button>
+    </form>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/base/wizard.js') }}"></script>

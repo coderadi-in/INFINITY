@@ -14,6 +14,7 @@ const wizardShortcuts = [
     { ctrl: true, shift: false, alt: true, key: "d", targetId: "deleteClientWizard" },
     { ctrl: false, shift: true, alt: true, key: "n", targetId: "newServiceWizard" },
     { ctrl: false, shift: true, alt: true, key: "p", targetId: "newPaymentWizard" },
+    { ctrl: true, shift: true, alt: false, key: "e", targetId: "newExpenseWizard" },
 ];
 
 // ==================================================
@@ -99,8 +100,8 @@ export function addToggleWizardListener(btn, wizard) {
     btn.addEventListener('click', () => {toggleWizard(wizard)})
 }
 
-// * FUNCTION TO OPEN/CLOSE PAYMENTS ACTION TRAY
-export function togglePaymentsActionTray(buttons) {
+// * FUNCTION TO OPEN/CLOSE EXPENSE ACTION TRAY
+export function addActionTrayEvent(buttons) {
     if (!buttons.length) {return;}
     buttons.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -109,6 +110,13 @@ export function togglePaymentsActionTray(buttons) {
             if (target) {target.classList.toggle('open');}
         })
     });
+}
+
+// * FUNCTION TO CLOSE ACTION TRAY ONCE WIZARD OPENS
+export function closeActionTray(btn) {
+    const tableRow = btn.closest(".table-row");
+    const managementRow = tableRow ? tableRow.querySelector(".management-row") : null;
+    if (managementRow) {managementRow.classList.remove("open");}
 }
 
 // ==================================================

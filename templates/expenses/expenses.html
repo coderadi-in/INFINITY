@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>DASHBOARD &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/expenses/expenses.css') }}">
+</head>
+
+<body>
+    {% include 'components/msg.html' %}
+    {% include 'widgets/new_expense.html' %}
+    {% include 'widgets/update_expense.html' %}
+    {% include 'widgets/delete_expense.html' %}
+
+    <main class="main">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content">
+            {% include 'components/header.html' %}
+
+            <section class="app-body column gap-12">
+                <div class="top-row row gap-12">
+                    <h2 class="h2">Expenses</h2>
+                </div>
+
+                <div class="controls-row row gap-12">
+                    <hr class="divider-l w-full">
+                    <button class="btn icon-fl p-12 rounded-16" id="newExpenseBtn">
+                        <span class="symbol">add</span>
+                        <span class="text">New expense</span>
+                    </button>
+                </div>
+
+                <div class="expenses-table column gap-8">
+                    <div class="w-full">
+                        <div class="grid cols-3 p-12 table-row">
+                            <div class="flex"><span class="text uppercase">date</span></div>
+                            <div class="flex h-center"><span class="text uppercase text-center">amount</span></div>
+                            <div class="flex h-en"><span class="text uppercase text-right">notes</span></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full column gap-8">
+                        {% for expense in data.expenses %}
+                        <div class="grid cols-3 p-12 table-row">
+                            <div class="flex">
+                                <span class="text">{{ expense.paid_on }}</span>
+                            </div>
+
+                            <div class="flex h-center">
+                                <span class="text">{{ expense.amount }}</span>
+                            </div>
+
+                            <div class="flex h-en gap-12">
+                                <span class="text">{{ expense.category }}</span>
+                                <span class="link symbol" id="openExpenseManagement">more_vert</span>
+                            </div>
+
+                            <div class="management-row row gap-12 p-12">
+                                <span class="link symbol close-expense-action">close</span>
+                                <span>|</span>
+
+                                <span class="link symbol fl-icon update-expense-btn" data-expense-id="{{ expense.id }}"
+                                    data-expense-title="{{ expense.title }}"
+                                    data-expense-amount="{{ expense.amount }}"
+                                    data-expense-category="{{ expense.category }}"
+                                    data-expense-paid-on="{{ expense.paid_on }}"
+                                    data-expense-desc="{{ expense.description }}">border_color</span>
+                                <span>|</span>
+                                
+                                <span class="link symbol fl-icon delete-expense-btn" data-expense-id="{{ expense.id }}"
+                                    data-expense-title="{{ expense.title }}">delete</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script type="module" src="{{ url_for('static', filename='js/expenses/expenses.js') }}"></script>
+</body>
+
+</html>

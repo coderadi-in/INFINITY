@@ -1,0 +1,35 @@
+/* ================================================== */
+/* CONTROLS ROW */
+/* ================================================== */
+
+.controls-row .btn { min-width: 200px; }
+
+/* ================================================== */
+/* EXPENSES TABLE */
+/* ================================================== */
+
+.expenses-table .table-row {
+    background-color: var(--surface);
+    position: relative;
+}
+
+.expenses-table .table-row .management-row {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: var(--surface-alt-2);
+
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 
+        transform 0.4s ease-in-out,
+        opacity 0.4s ease-in-out;
+}
+
+.expenses-table .table-row .management-row.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
