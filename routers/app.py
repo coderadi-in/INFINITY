@@ -102,7 +102,7 @@ def numbers():
             'type': 'expense',
             'date': expense_obj.paid_on,
             'amount': expense_obj.amount,
-            'notes': expense_obj.description or "",
+            'notes': expense_obj.category or "",
             'created_at': expense_obj.created_at,
         })
 
