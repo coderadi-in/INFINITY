@@ -2,14 +2,22 @@
 // ELEMENT REFERENCE
 // ==================================================
 
+// ? BUTTON REFERENCE
 const themeInputs = document.getElementsByName('themeInput');
 const sidebarToggles = document.getElementsByName('sidebarToggle');
+const changePasswordBtn = document.getElementById('changePasswordBtn');
+const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+
+// ? WIZARD REFERENCE
+const changePasswordWizard = document.getElementById('changePasswordWizard');
+const deleteAccountWizard = document.getElementById('deleteAccountWizard');
 
 // ==================================================
 // IMPORTS
 // ==================================================
 
 import { toggleTheme, saveTheme, getTheme, saveSidebarToggle, getSidebarToggle } from '../base/base.js';
+import { toggleWizard } from '../base/wizard.js';
 import { showSidebar, hideSidebar } from '../components/sidebar.js';
 
 // ==================================================
@@ -57,6 +65,16 @@ sidebarToggles.forEach((toggle) => {
             saveSidebarToggle('off');
         }
     });
+});
+
+// & EVENT LISTENER FOR CHANGE-PASSWORD-BTN CLICK
+changePasswordBtn.addEventListener('click', () => {
+    toggleWizard(changePasswordWizard);
+});
+
+// & EVENT LISTENER FOR DELETE-ACCOUNT-BTN CLICK
+deleteAccountBtn.addEventListener('click', () => {
+    toggleWizard(deleteAccountWizard);
 });
 
 // ==================================================

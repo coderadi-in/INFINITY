@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/wizard.css') }}">
+
+<section class="center w-full h-screen wizard-container" id="deleteAccountWizard">
+    <form action="/auth/delete-account" method="post" class="form column gap-20 p-20 rounded-16">
+        <span class="link symbol" id="closeWizard">close</span>
+
+        <div class="heading column">
+            <h3 class="h3 uppercase">delete account</h3>
+            <p class="para">Are you sure to delete this account?</p>
+        </div>
+
+        <div class="form-elem column gap-4">
+            <label for="password">Your password</label>
+            <input required type="password" name="password" id="password" class="input" placeholder="Enter you password to confirm">
+        </div>
+
+        <span class="mini">The action will delete every data of this INFINITY account, and it can't be recovered.</span>
+
+        <button type="submit" class="btn fl p-12 rounded-16">
+            <span class="mini uppercase">delete account</span>
+        </button>
+    </form>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/base/wizard.js') }}"></script>

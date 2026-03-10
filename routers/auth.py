@@ -13,7 +13,7 @@ auth = Blueprint("auth", __name__, url_prefix='/auth')
 def start():
     return render_template('.index.html')
 
-
+# & SIGNUP ROUTE
 @auth.route('/signup', methods=['POST'])
 def signup():
     # ACCESS FORM DATA
@@ -40,7 +40,7 @@ def signup():
     flash("Your INFINITY account has been signed up.", "check_circle")
     return redirect(url_for('app.dashboard'))
 
-
+# & LOGIN ROUTE
 @auth.route('/login', methods=['POST'])
 def login():
     # ACCESS FORM DATA
@@ -72,9 +72,48 @@ def login():
     flash("Your INFINITY account has been logged in.", "check_circle")
     return redirect(url_for('app.dashboard'))
 
-
+# & LOGOUT ROUTE
 @auth.route('/logout')
 def logout():
     logout_user()
     flash("This INFINITY account has been logged out.", "info")
+    return redirect(url_for('app.index'))
+
+# & CHANGE-PASSWORD ROUTE
+@auth.route('/change-password/', methods=['POST'])
+def change_password():
+    # ACCESS FORM DATA
+    current_password = request.form.get('currentPassword')
+    new_password = request.form.get('newPassword')
+    
+    # VALIDATE CURRENT PASSWORD
+    if (not bcrypt.check_password_hash(current_user.password, current_password)):
+        flash("The provided current password isn't matched to this INFINITY account.", "error")
+        return redirect(url_for('app.settings'))
+    
+    # SAVE NEW PASSWORD
+    current_user.password = bcrypt.generate_password_hash(new_password)
+    db.session.commit()
+
+    # REDIRECT USER
+    flash("The new password has been saved.", "check_circle")
+    return redirect(url_for('app.settings'))
+
+# & DELETE-ACCOUNT ROUTE
+@auth.route('/delete-account/', methods=['POST'])
+def delete_account():
+    # ACCESS FORM DATA
+    password = request.form.get('password')
+
+    # VALIDATE CURRENT PASSWORD
+    if (not bcrypt.check_password_hash(current_user.password, password)):
+        flash("The provided current password isn't matched to this INFINITY account.", "error")
+        return redirect(url_for('app.settings'))
+    
+    user = current_user._get_current_object()
+    Expense.query.filter_by(user_id=user.id).delete(synchronize_session=False)
+    logout_user()
+    db.session.delete(user)
+    db.session.commit()
+    flash("Your INFINITY account has been deleted.", "info")
     return redirect(url_for('app.index'))

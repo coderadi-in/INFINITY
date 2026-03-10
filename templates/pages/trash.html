@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>TRASH &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/trash.css') }}">
+</head>
+
+<body>
+    {% include 'components/msg.html' %}
+
+    <main class="main">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content">
+            {% include 'components/header.html' %}
+
+            <section class="app-body column gap-12">
+                <div class="top-row">
+                    <h1 class="h1">trash</h1>
+                </div>
+
+                <div class="controls-row grid cols-4 pv-4">
+                    <button class="btn p-8 rounded-12 selection-btn" id="clientsBtn">
+                        <span class="text uppercase">clients</span>
+                    </button>
+
+                    <button class="btn p-8 rounded-12 selection-btn" id="servicesBtn">
+                        <span class="text uppercase">services</span>
+                    </button>
+
+                    <button class="btn p-8 rounded-12 selection-btn" id="paymentsBtn">
+                        <span class="text uppercase">payments</span>
+                    </button>
+
+                    <button class="btn p-8 rounded-12 selection-btn" id="expensesBtn">
+                        <span class="text uppercase">expenses</span>
+                    </button>
+                </div>
+
+                <div class="info-row">
+                    <div class="clients-info grid gap-20">
+                        {% for client in data.clients %}
+                        <div class="client-info column gap-8 p-12 rounded-16">
+                            <span class="text">{{ client.name }}</span>
+                            <span class="text">{{ client.email or "Email not provided" }}</span>
+                            <span class="text">{{ client.phone or "Phone not provided" }}</span>
+                            <span class="text">Acquisition: {{ client.created_at }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script type="module" src="{{ url_for('static', filename='js/base/appearanceManager.js') }}"></script>
+</body>
+
+</html>

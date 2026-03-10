@@ -45,13 +45,13 @@
                     <tbody class="w-full column gap-8">
                         {% for client in data.clients %}
                         {% if not client.is_deleted %}
-                        <tr class="grid cols-3 p-12">
+                        <tr class="grid cols-3 p-12 client-info-row">
                             <td class="flex"><a href="/clients/{{ client.id }}" class="ulink">
                                     <span class="text text-left w-full">{{ client.name }}</span>
                                 </a></td>
 
                             <td class="flex"><span class="text text-center w-full">{{ client.status }}</span></td>
-                            <td class="flex"><span class="text text-right w-full">{{ client.created_at }}</span></td>
+                            <td class="flex"><span class="text text-right w-full date-text">{{ client.created_at }}</span></td>
                         </tr>
                         {% endif %}
                         {% endfor %}

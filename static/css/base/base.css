@@ -37,8 +37,8 @@
     --background: #0B0C10;
     --surface: #15161C;
 
-    --primary: #8C92D9;
-    --secondary: #5A5E87;
+    --primary: #6577B8;
+    --secondary: #7381B8;
 
     --accent-green: #5ED69A;
     --accent-red: #F06A61;
@@ -357,7 +357,7 @@ textarea.input {
 
 .fl {
     background-color: var(--primary);
-    color: var(--background) !important;
+    color: #F1F3F8 !important;
     transition: background-color 0.4s ease-in-out;
 }
 .fl:hover { background-color: var(--secondary); }
@@ -377,7 +377,7 @@ textarea.input {
     justify-content: center;
     gap: 8px;
     background-color: var(--primary);
-    color: var(--background) !important;
+    color: #F1F3F8 !important;
     transition: background-color 0.4s ease-in-out;
 }
 .icon-fl:hover { background-color: var(--secondary); }
@@ -449,16 +449,16 @@ textarea.input {
 .divider { border: 1px solid var(--border); }
 .divider-l { border: 2px solid var(--border); }
 
-.coming-soon {
+.disabled {
     background-color: var(--border);
     color: var(--text-alt);
-    cursor: wait;
+    cursor: not-allowed;
     opacity: 0.6;
 }
 
-.coming-soon-alt {
+.disabled-alt {
     color: var(--text-alt);
-    cursor: wait;
+    cursor: not-allowed;
     opacity: 0.6;
 }
 

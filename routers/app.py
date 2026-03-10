@@ -157,12 +157,6 @@ def numbers():
         },
     })
 
-# & INSIGHTS ROUTE
-@app.route('/insights/')
-@login_required
-def insights():
-    return render_template('pages/insights.html')
-
 # & SETTINGS ROUTE
 @app.route('/settings/')
 @login_required
@@ -237,12 +231,52 @@ def account():
 def docs():
     return render_template('docs/main.html')
 
-# & REPORT ROUTE
-@app.route('/report/')
-def report():
-    return render_template('pages/report.html')
-
 # & TRASH ROUTE
 @app.route('/trash/')
 def trash():
-    return render_template('pages/trash.html')
+    # FETCH ALL DELETED CLIENTS
+    deleted_clients = Client.query.filter(
+        Client.user_id == current_user.id,
+        Client.is_deleted == True
+    ).order_by(
+        Client.created_at.desc()
+    ).all()
+
+    # FETCH ALL DELETED SERVICES
+    deleted_services = Service.query.join(Client).options(
+        joinedload(Service.client)
+    ).filter(
+        Client.user_id == current_user.id,
+        Service.is_deleted == True
+    ).order_by(
+        Service.created_at.desc()
+    ).all()
+
+    # FETCH ALL DELETED PAYMENTS
+    deleted_payments = Payment.query.join(Service).join(Client).options(
+        joinedload(Payment.service).joinedload(Service.client)
+    ).filter(
+        Client.user_id == current_user.id,
+        Payment.is_deleted == True
+    ).order_by(
+        db.func.coalesce(Payment.paid_on, Payment.created_at).desc(),
+        Payment.created_at.desc()
+    ).all()
+
+    # FETCH ALL DELETED EXPENSES
+    deleted_expenses = Expense.query.filter(
+        Expense.user_id == current_user.id,
+        Expense.is_deleted == True
+    ).order_by(
+        db.func.coalesce(Expense.paid_on, Expense.created_at).desc(),
+        Expense.created_at.desc()
+    ).all()
+
+    trash_obj = {
+        'clients': deleted_clients,
+        'services': deleted_services,
+        'payments': deleted_payments,
+        'expenses': deleted_expenses,
+    }
+
+    return render_template('pages/trash.html', data=trash_obj)

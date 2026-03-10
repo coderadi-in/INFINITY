@@ -1,0 +1,17 @@
+/* ================================================== */
+/* CONTROLS ROW */
+/* ================================================== */
+
+.controls-row {
+    width: min(100%, 700px);
+    border-bottom: 1px solid var(--primary);
+}
+
+.controls-row .selection-btn.selected { background-color: var(--border); }
+
+/* ================================================== */
+/* CLIENTS INFO */
+/* ================================================== */
+
+.clients-info { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
+.clients-info .client-info { background-color: var(--surface); }
