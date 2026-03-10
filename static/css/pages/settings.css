@@ -1,0 +1,34 @@
+/* ================================================== */
+/* CONTROLS ROW */
+/* ================================================== */
+
+.controls-row .link { min-width: 160px; }
+
+/* ================================================== */
+/* SETTINGS ROW */
+/* ================================================== */
+
+.settings-row { background-color: var(--surface); }
+
+.settings-row label {
+    position: relative;
+    padding: 8px 24px;
+    border-radius: 16px;
+    background-color: var(--border);
+}
+
+/* | UPDATES THE SELECTED OPTION */
+.settings-row label:has(.input:checked) {
+    background-color: var(--primary);
+    color: var(--background);
+}
+
+.settings-row .input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.settings-row .export-btn { background-color: var(--border); }
+.settings-row #deleteAccountBtn { background-color: var(--accent-red); }

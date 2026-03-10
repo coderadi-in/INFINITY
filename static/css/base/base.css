@@ -33,6 +33,24 @@
     --f4: min(36px, 10vw);
 }
 
+.body-dark {
+    --background: #0B0C10;
+    --surface: #15161C;
+
+    --primary: #8C92D9;
+    --secondary: #5A5E87;
+
+    --accent-green: #5ED69A;
+    --accent-red: #F06A61;
+
+    --text: #F1F3F8;
+    --text-alt: #9CA3AF;
+
+    --border: #262A35;
+    --surface-alt: #FFFFFF14;
+    --surface-alt-2: #1B2030;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -419,6 +437,7 @@ textarea.input {
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
+  vertical-align: bottom;
 }
 
 .fl-icon {font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;}

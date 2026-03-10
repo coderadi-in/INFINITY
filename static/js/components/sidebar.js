@@ -34,11 +34,11 @@ const setSidebarState = (isHidden) => {
     }
 };
 
-const hideSidebar = () => {
+export const hideSidebar = () => {
     setSidebarState(true);
 };
 
-const showSidebar = () => {
+export const showSidebar = () => {
     setSidebarState(false);
 };
 

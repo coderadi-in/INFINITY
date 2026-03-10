@@ -49,7 +49,7 @@
                 <div class="controls-row row gap-12">
                     <hr class="divider-l w-full">
 
-                    <a href="#" class="link btn icon-fl p-8 rounded-16">
+                    <a href="#" class="link btn icon-fl p-8 rounded-16 coming-soon">
                         <span class="symbol">event</span>
                         <span class="text fl-icon">Send reminder</span>
                     </a>
@@ -89,10 +89,6 @@
 
                                 <ul class="list row gap-8">
                                     <li><span class="link symbol" id="newServiceBtn">add</span></li>
-
-                                    <li><a href="/clients/{{ data.client.id }}/services/" class="link">
-                                            <span class="symbol">expand_content</span>
-                                        </a></li>
                                 </ul>
                             </div>
                             <hr class="divider">
@@ -181,6 +177,8 @@
     </main>
 
     <script type="module" src="{{ url_for('static', filename='js/clients/client.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/base/appearanceManager.js') }}"></script>
 </body>
 
 </html>
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>SETTINGS &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/settings.css') }}">
+</head>
+<body>
+    {% include 'components/msg.html' %}
+
+    <main class="main">
+        {% include 'components/sidebar.html' %}
+
+        <section class="app-content">
+            {% include 'components/header.html' %}
+
+            <section class="app-body column gap-12">
+                <div class="top-row">
+                    <h1 class="h1">settings</h1>
+                </div>
+
+                <div class="controls-row row gap-12">
+                    <hr class="divider w-full">
+                    
+                    <a href="/account/" class="link row gap-8">
+                        <span class="symbol">person</span>
+                        <span class="text uppercase">your profile</span>
+                    </a>
+                </div>
+
+                <div class="settings-row column gap-8 p-16 rounded-16 shadow-sm">
+                    <span class="text uppercase text-muted">appearance</span>
+
+                    <div class="row gap-12">
+                        <span class="text">Theme</span>
+
+                        <label for="darkTheme">
+                            <span class="symbol">dark_mode</span>
+                            <input type="radio" name="themeInput" id="darkTheme" class="input" value="dark">
+                        </label>
+
+                        <label for="lightTheme">
+                            <span class="symbol">light_mode</span>
+                            <input type="radio" name="themeInput" id="lightTheme" class="input" value="light">
+                        </label>
+
+                        <label for="systemTheme">
+                            <span class="symbol">contrast</span>
+                            <input type="radio" name="themeInput" id="systemTheme" class="input" value="system">
+                        </label>
+                    </div>
+
+                    <div class="row gap-12">
+                        <span class="text">Sidebar collapse</span>
+
+                        <label for="sidebarOn">
+                            <span class="symbol fl-icon">thumbnail_bar</span>
+                            <input type="radio" name="sidebarToggle" id="sidebarOn" class="input" value="on">
+                        </label>
+
+                        <label for="sidebarOff">
+                            <span class="symbol fl-icon">width_full</span>
+                            <input type="radio" name="sidebarToggle" id="sidebarOff" class="input" value="off">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-row column gap-8 p-16 rounded-16 shadow-sm">
+                    <span class="text uppercase text-muted">account settings</span>
+
+                    <div class="row gap-12">
+                        <span class="text">Change password</span>
+                        <span class="symbol link" id="openPasswordChange">border_color</span>
+                    </div>
+                </div>
+
+                <div class="settings-row column gap-8 p-16 rounded-16 shadow-sm">
+                    <span class="text uppercase text-muted">data &amp; safety</span>
+
+                    <div class="row gap-12">
+                        <span class="text">Export data</span>
+                        <span class="text btn uppercase pv-4 ph-12 rounded-8 export-btn" id="exportCSV">csv</span>
+                    </div>
+
+                    <div class="row gap-12">
+                        <span class="text">Delete account</span>
+                        <span class="text btn fl uppercase pv-8 ph-16 rounded-16" id="deleteAccountBtn">delete</span>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script type="module" src="{{ url_for('static', filename='js/pages/settings.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/base/appearanceManager.js') }}"></script>
+</body>
+</html>

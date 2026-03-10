@@ -23,18 +23,21 @@
 .alert-item-hidden {
     transform: translateY(40px);
     opacity: 0;
+    pointer-events: none;
 }
 
 /* Enter/visible state: moved upward into place and fully visible. */
 .alert-item-visible {
     transform: translateY(0);
     opacity: 1;
+    pointer-events: auto;
 }
 
 /* Exit state: move down again and fade out. */
 .alert-item-exit {
     transform: translateY(40px);
     opacity: 0;
+    pointer-events: none;
 }
 
 /* Shared transition timing for all animation states. */

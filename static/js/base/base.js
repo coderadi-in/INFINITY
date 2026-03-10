@@ -1,11 +1,41 @@
 // * FUNCTION TO CREATE A TIMEOUT
 export const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// * FUNCTION TO GET SYSTEM THEME
+export const getSystemTheme = () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'body-dark';
+    }
+    return 'body-light';
+};
+
+// * FUNCTION TO TOGGLE THEME OF SOFTWARE
+export function toggleTheme(theme) {
+    if (!theme) { return; }
+
+    if (theme == 'dark') { document.body.classList.add('body-dark'); }
+    else if (theme == 'light') { document.body.classList.remove('body-dark'); }
+    else if (theme == 'system') { document.body.classList.add(getSystemTheme()); }
+    else { return; }
+}
+
+// * FUNCTION TO SAVE NEW THEME IN LOCALSTORAGE
+export function saveTheme(theme) { localStorage.setItem('theme', theme); }
+
+// * FUNCTION TO GET SAVED THEME FROM LOCALSTORAGE
+export function getTheme() { return localStorage.getItem('theme'); }
+
+// * FUNCTION TO SAVE SIDEBAR TOGGLE IN LOCALSTORAGE
+export function saveSidebarToggle(toggle) { localStorage.setItem('sidebar', toggle); }
+
+// * FUNCTION TO GET SIDEBAR TOGGLE FROM LOCALSTORAGE
+export function getSidebarToggle() { return localStorage.getItem('sidebar'); }
+
 // * FUNCTION TO REDIRECT USER TO ANY PAGE
 export function confirmRedirect(btn) {
-    if (!btn) {return;}
+    if (!btn) { return; }
     const redirectUrl = btn.dataset.redirectUrl;
-    if (!redirectUrl) {return;}
+    if (!redirectUrl) { return; }
     window.location.href = redirectUrl;
 }
 

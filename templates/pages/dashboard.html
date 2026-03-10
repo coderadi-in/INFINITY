@@ -28,6 +28,7 @@
         </section>
     </main>
 
+    <script type="module" src="{{ url_for('static', filename='js/base/appearanceManager.js') }}"></script>
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}");
