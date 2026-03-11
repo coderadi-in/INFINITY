@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="controls-row grid cols-4 pv-4">
-                    <button class="btn p-8 rounded-12 selection-btn" id="clientsBtn">
+                    <button class="btn p-8 rounded-12 selection-btn selected" id="clientsBtn">
                         <span class="text uppercase">clients</span>
                     </button>
 
@@ -45,13 +45,66 @@
                 </div>
 
                 <div class="info-row">
-                    <div class="clients-info grid gap-20">
+                    <div class="info-grid clients-info grid gap-20">
                         {% for client in data.clients %}
-                        <div class="client-info column gap-8 p-12 rounded-16">
+                        <div class="client-info info-area column gap-8 p-12 rounded-16">
                             <span class="text">{{ client.name }}</span>
                             <span class="text">{{ client.email or "Email not provided" }}</span>
                             <span class="text">{{ client.phone or "Phone not provided" }}</span>
                             <span class="text">Acquisition: {{ client.created_at }}</span>
+
+                            <a href="/trash/restore/?object=client&id={{ client.id }}" class="link btn icon-fl pv-8 ph-12 rounded-16">
+                                <span class="symbol">restore_from_trash</span>
+                                <span class="text">Restore</span>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="info-grid services-info grid gap-20 hidden">
+                        {% for service in data.services %}
+                        <div class="service-info info-area column gap-8 p-12 rounded-16">
+                            <span class="text">{{ service.title }}</span>
+                            <span class="text">{{ service.category }}</span>
+                            <span class="text">{{ service.amount }}</span>
+                            <span class="text">{{ service.created_at }}</span>
+
+                            <a href="/trash/restore/?object=service&id={{ service.id }}" class="link btn icon-fl pv-8 ph-12 rounded-16">
+                                <span class="symbol">restore_from_trash</span>
+                                <span class="text">Restore</span>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="info-grid payments-info grid gap-20 hidden">
+                        {% for payment in data.payments %}
+                        <div class="service-info info-area column gap-8 p-12 rounded-16">
+                            <span class="text">{{ payment.amount }}</span>
+                            <span class="text">{{ payment.paid_on }}</span>
+                            <span class="text">{{ payment.method }}</span>
+
+
+                            <a href="/trash/restore/?object=payment&id={{ payment.id }}" class="link btn icon-fl pv-8 ph-12 rounded-16">
+                                <span class="symbol">restore_from_trash</span>
+                                <span class="text">Restore</span>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="info-grid expenses-info grid gap-20 hidden">
+                        {% for expense in data.expenses %}
+                        <div class="expense-info info-area column gap-8 p-12 rounded-16">
+                            <span class="text">{{ expense.title }}</span>
+                            <span class="text">INR {{ expense.amount }}</span>
+                            <span class="text">{{ expense.paid_on }}</span>
+
+
+                            <a href="/trash/restore/?object=expense&id={{ expense.id }}" class="link btn icon-fl pv-8 ph-12 rounded-16">
+                                <span class="symbol">restore_from_trash</span>
+                                <span class="text">Restore</span>
+                            </a>
                         </div>
                         {% endfor %}
                     </div>
@@ -61,6 +114,7 @@
     </main>
 
     <script type="module" src="{{ url_for('static', filename='js/base/appearanceManager.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/pages/trash.js') }}"></script>
 </body>
 
 </html>

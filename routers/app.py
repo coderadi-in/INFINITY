@@ -226,10 +226,9 @@ def account():
     flash("The account info has been updated.", "check_circle")
     return redirect(url_for('app.account'))
 
-# & DOCS ROUTE
-@app.route('/docs/')
-def docs():
-    return render_template('docs/main.html')
+# ==================================================
+# TRASH
+# ==================================================
 
 # & TRASH ROUTE
 @app.route('/trash/')
@@ -280,3 +279,36 @@ def trash():
     }
 
     return render_template('pages/trash.html', data=trash_obj)
+
+# | RESTORE ROUTE
+@app.route('/trash/restore/')
+def restore_data():
+    # ACCESS PROTOCOL DATA
+    proto_obj = request.args.get('object')
+    proto_id = request.args.get('id')
+
+    # PROTOCOL VALIDATION
+    if (not proto_obj) or (not proto_id):
+        return redirect(url_for('app.trash'))
+    
+    # PREPARE DB TABLES
+    tables_dict = {
+        table.__tablename__: table
+        for table in db.Model.__subclasses__()
+        if hasattr(table, '__tablename__')
+    }
+    
+
+    target_object = tables_dict.get(proto_obj)
+    if (not target_object):
+        return redirect(url_for('app.trash'))
+    
+    target_row = target_object.query.get(proto_id)
+    if (not target_row):
+        return redirect(url_for('app.trash'))
+    
+    target_row.is_deleted = False
+    db.session.commit()
+
+    flash("The deleted object has been restored.", "check_circle")
+    return redirect(url_for('app.trash'))

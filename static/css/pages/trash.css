@@ -7,11 +7,19 @@
     border-bottom: 1px solid var(--primary);
 }
 
+.controls-row .selection-btn { color: var(--text); }
 .controls-row .selection-btn.selected { background-color: var(--border); }
 
 /* ================================================== */
-/* CLIENTS INFO */
+/* INFO GRID */
 /* ================================================== */
 
-.clients-info { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
-.clients-info .client-info { background-color: var(--surface); }
+.info-grid { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
+.info-grid.hidden { display: none; }
+
+.info-grid .info-area {
+    background-color: var(--surface);
+    max-width: 400px;
+}
+
+.info-grid .info-area .btn { margin-left: auto; }

@@ -48,6 +48,7 @@
 
                     <div class="w-full column gap-8">
                         {% for expense in data.expenses %}
+                        {% if not expense.is_deleted %}
                         <div class="grid cols-3 p-12 table-row">
                             <div class="flex">
                                 <span class="text">{{ expense.paid_on }}</span>
@@ -61,23 +62,24 @@
                                 <span class="text">{{ expense.category }}</span>
                                 <span class="link symbol" id="openExpenseManagement">more_vert</span>
                             </div>
-
+                            
                             <div class="management-row row gap-12 p-12">
                                 <span class="link symbol close-expense-action">close</span>
                                 <span>|</span>
-
+                                
                                 <span class="link symbol fl-icon update-expense-btn" data-expense-id="{{ expense.id }}"
-                                    data-expense-title="{{ expense.title }}"
-                                    data-expense-amount="{{ expense.amount }}"
-                                    data-expense-category="{{ expense.category }}"
+                                data-expense-title="{{ expense.title }}"
+                                data-expense-amount="{{ expense.amount }}"
+                                data-expense-category="{{ expense.category }}"
                                     data-expense-paid-on="{{ expense.paid_on }}"
                                     data-expense-desc="{{ expense.description }}">border_color</span>
-                                <span>|</span>
-                                
+                                    <span>|</span>
+                                    
                                 <span class="link symbol fl-icon delete-expense-btn" data-expense-id="{{ expense.id }}"
-                                    data-expense-title="{{ expense.title }}">delete</span>
+                                data-expense-title="{{ expense.title }}">delete</span>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>

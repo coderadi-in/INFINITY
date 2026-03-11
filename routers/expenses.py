@@ -109,7 +109,7 @@ def delete_expense(expense):
         return redirect(url_for('expenses.read_expense'))
     
     # DELETE OBJECT
-    db.session.delete(expense_obj)
+    expense_obj.is_deleted = True
     db.session.commit()
     
     # SAVE & REDIRECT
