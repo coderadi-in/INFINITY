@@ -15,6 +15,13 @@ const paymentsSection = document.querySelector('.payments-info');
 const expensesSection = document.querySelector('.expenses-info');
 
 // ==================================================
+// IMPORTS
+// ==================================================
+
+import { blockKeyboardDefaults } from '../base/base.js';
+const unblock = blockKeyboardDefaults();
+
+// ==================================================
 // FUNCTIONS
 // ==================================================
 

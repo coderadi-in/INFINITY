@@ -1,7 +1,7 @@
 '''coderadi &bull; App navigation routes management file for the Project.'''
 
 # ? IMPORTS
-from datetime import date
+from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from sqlalchemy.orm import joinedload
 from plugins import *
@@ -27,7 +27,29 @@ def index():
 @app.route('/dashboard/')
 @login_required
 def dashboard():
-    return render_template('pages/dashboard.html')
+    this_year = datetime.now().year
+    # GET ALL ACTIVE CLIENTS & TOTAL REVENUE
+    active_clients = []
+    revenue_list = []
+    for client in current_user.clients:
+        if (client.status == 'active') and (client.created_at.year == this_year):
+            active_clients.append(client)
+
+        for service in client.services:
+            for payment in service.payments:
+                revenue_list.append(payment.amount)
+    
+    # GET TOTAL EXPENSE
+    expense_list = []
+    for expense in current_user.expenses:
+        expense_list.append(expense.amount)
+    
+    # RETURN RESPONSE
+    return render_template('pages/dashboard.html', data={
+        'total_active_clients': len(active_clients),
+        'total_revenue': sum(revenue_list),
+        'total_expense': sum(expense_list),
+    })
 
 # & NUMBERS ROUTE
 @app.route('/numbers/')

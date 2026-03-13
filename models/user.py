@@ -25,4 +25,5 @@ class User(db.Model, UserMixin):
     plan_type = db.Column(db.String(20), nullable=False, default="free")
     created_at = db.Column(db.Date, nullable=False, default=db.func.current_date())
 
+    expenses = db.relationship("Expense", backref="user", lazy=True, cascade="all, delete-orphan")
     clients = db.relationship("Client", backref="user", lazy=True, cascade="all, delete-orphan")

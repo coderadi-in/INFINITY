@@ -24,11 +24,57 @@
         <section class="app-content">
             {% include 'components/header.html' %}
 
-            <section class="app-body"></section>
+            <section class="app-body column gap-20">
+                <div class="top-row flex gap-20">
+                    <div class="info-section user-info p-16 rounded-16 shadow-sm column gap-12">
+                        <div class="column gap-4 info">
+                            <span class="mini uppercase text-muted">total clients</span>
+                            <h1 class="h1">{{ data.total_active_clients }}</h1>
+                        </div>
+
+                        <div class="column gap-4 info">
+                            <span class="mini uppercase text-muted">total revenue</span>
+                            <h2 class="h2" id="totalRevenue">{{ data.total_revenue }}</h2>
+                        </div>
+
+                        <div class="column gap-4 info">
+                            <span class="mini uppercase text-muted">total expense</span>
+                            <h2 class="h2" id="totalExpense">{{ data.total_expense }}</h2>
+                        </div>
+                    </div>
+
+                    <div class="info-section renewal-info p-16 rounded-16 shadow-sm column gap-12">
+                        <div class="row h-sb hider">
+                            <span class="mini uppercase text-muted">upcoming renewals</span>
+                            <span class="link symbol hider" id="toggleRenewalInfo">resize</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section due-info p-16 rounded-16 shadow-sm column gap-12">
+                        <div class="row h-sb hider">
+                            <span class="mini uppercase text-muted">payments dues</span>
+                            <span class="link symbol hider" id="toggleDueInfo">resize</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-row flex gap-20">
+                    <div class="chart-area rounded-16 shadow-sm center">
+                        <canvas id="lineArea"></canvas>
+                    </div>
+
+                    <div class="chart-area rounded-16 shadow-sm center">
+                        <canvas id="doughnutArea"></canvas>
+                    </div>
+                </div>
+            </section>
         </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="{{ url_for('static', filename='js/base/appearanceManager.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>
+    
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}");
