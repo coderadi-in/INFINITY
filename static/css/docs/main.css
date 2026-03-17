@@ -1,0 +1,84 @@
+/* ================================================== */
+/* HEADER */
+/* ================================================== */
+
+.header { background-color: var(--border); }
+
+/* ================================================== */
+/* MAIN */
+/* ================================================== */
+
+.main {
+    padding: 48px;
+    height: 100%;
+}
+
+.index {
+    background-color: var(--text);
+    color: var(--background);
+}
+
+/* ================================================== */
+/* QUICK START */
+/* ================================================== */
+
+.quick-start {
+    background-color: var(--surface);
+    width: 100%;
+}
+
+.quick-start .link {
+    border: 1px solid var(--surface-alt);
+    flex: 1;
+}
+
+.quick-start #signupLink { background-color: var(--border); }
+
+/* ================================================== */
+/* KEYBOARD SHORTCUTS */
+/* ================================================== */
+
+.keyboard-shortcuts { background-color: var(--surface); }
+.keyboard-shortcuts .link { background-color: var(--border); }
+
+.keyboard-shortcuts .commands .command:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+}
+
+.keyboard-shortcuts .commands .command .key-comb {
+    background-color: var(--border);
+}
+
+.keyboard-shortcuts .pro-tip {
+    background-color: var(--text);
+    color: var(--background);
+}
+
+/* ================================================== */
+/* CORE CONCEPTS */
+/* ================================================== */
+
+.concepts { background-color: var(--surface); }
+
+.concepts .grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+}
+
+.concepts .concept .symbol {
+    background-color: var(--border);
+    width: fit-content;
+}
+
+/* ================================================== */
+/* & RESPONSIVENESS */
+/* ================================================== */
+
+@media (max-width: 1024px) {
+    .upper-part { flex-direction: column; }
+}
+
+@media (max-width: 568px) {
+    .main { padding: 20px; }
+    .quick-start .bottom-controls { flex-direction: column; }
+}

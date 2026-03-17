@@ -234,9 +234,9 @@ html { scroll-behavior: smooth; }
 /* TYPOGRAPHY */
 /* ================================================== */
 
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
 .uppercase { text-transform: uppercase; }
 .capitalize { text-transform: capitalize; }
 .normal-case { text-transform: none; }
