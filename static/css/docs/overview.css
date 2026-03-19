@@ -1,0 +1,46 @@
+/* ================================================== */
+/* MAIN */
+/* ================================================== */
+
+.main .section {
+    max-width: 1696px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 48px;
+}
+
+/* ================================================== */
+/* HERO */
+/* ================================================== */
+
+.hero { min-height: 50vh; }
+.hero .tag { background-color: var(--primary); }
+.hero .para { max-width: 900px; }
+
+/* ================================================== */
+/* CORE IDEA */
+/* ================================================== */
+
+.core-idea .grid { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
+.core-idea .idea { border: 1px solid var(--border); }
+
+.core-idea .idea .symbol {
+    background-color: var(--border);
+    width: fit-content;
+}
+
+/* ================================================== */
+/* WORKFLOW CONCEPTS */
+/* ================================================== */
+
+.workflow-concepts .concept { grid-template-columns: repeat(auto-fit, minmax(min(448px, 100%), 1fr)); }
+.workflow-concepts .concept .symbol { color: var(--primary); }
+.workflow-concepts .concept:last-child .img { order: 1; }
+
+/* ================================================== */
+/* & RESPONSIVENESS */
+/* ================================================== */
+
+@media (max-width: 568px) {
+    .main .section { padding: 20px; }
+}

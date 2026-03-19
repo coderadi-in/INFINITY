@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>OVERVIEW &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/docs/overview.css') }}">
+</head>
+
+<body class="body-dark">
+    <header class="header p-12 row h-sb">
+        <a href="/" class="link">
+            <img src="{{ url_for('static', filename='assets/icons/logo.png') }}" alt="INFINITY LOGO" class="logo">
+        </a>
+
+        {% if current_user.is_authenticated %}
+        <a href="/dashboard/" class="link btn fl p-12 rounded-16">Dashboard</a>
+        {% else %}
+        <a href="/#start" class="link btn fl p-12 rounded-16">Sign in</a>
+        {% endif %}
+    </header>
+
+    <main class="main column gap-64">
+        <section class="hero">
+            <section class="section column center text-center gap-12">
+                <span class="text tag pv-8 ph-12 rounded-full">v0.9</span>
+                <h1 class="h1 fs-48">build faster with <span class="highlight">INFINITY</span> workflow systems.</h1>
+                <p class="para">Understand the core mechanics, workflow strategies, and the design philosophy behind our
+                    high-performance platform.</p>
+            </section>
+        </section>
+
+        <section class="core-idea">
+            <section class="section column gap-48">
+                <h1 class="h1">how it works</h1>
+
+                <div class="grid gap-20">
+                    <div class="idea column gap-8 p-16 rounded-16 bg-card shadow-sm">
+                        <span class="symbol p-12 rounded-16">person_add</span>
+                        <h2 class="h2">setup client &amp; services</h2>
+                        <p class="para">Go to clients page, click [+] in the top-right corner, and create new client.
+                            Now you can allocate multiple services to the client.</p>
+                    </div>
+
+                    <div class="idea column gap-8 p-16 rounded-16 bg-card shadow-sm">
+                        <span class="symbol p-12 rounded-16">call_received</span>
+                        <h2 class="h2">manage payments</h2>
+                        <p class="para">Add payment for each allocated service using the [add receipt] button. This
+                            allows you to manage each client-service one at a time.</p>
+                    </div>
+
+                    <div class="idea column gap-8 p-16 rounded-16 bg-card shadow-sm">
+                        <span class="symbol p-12 rounded-16">call_made</span>
+                        <h2 class="h2">business expenses</h2>
+                        <p class="para">There's a dedicated page for managing expenses, you can create, read, update,
+                            and delete all expense records there in organized manner.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section class="workflow-concepts">
+            <section class="section column gap-48">
+                <div class="concept grid gap-20">
+                    <img src="{{ url_for('static', filename='assets/docs/concept-1.png') }}" alt="CONCEPT 1" class="img rounded-16 shadow-sm">
+
+                    <div class="text-content column gap-12">
+                        <span class="text uppercase highlight">concept 1</span>
+                        <h1 class="h1">payment-service alignment</h1>
+
+                        <p class="para">Each payment received from client is aligned to a specific service, this allows freelancers to manage each service and payments individually. Also this alignment makes due auto-calculation faster and more efficient, for the future updates.</p>
+
+                        <ul class="list column gap-12">
+                            <li class="row gap-12">
+                                <span class="symbol">checklist_rtl</span>
+
+                                <span class="text">Payment</span>
+                                <span class="symbol">swap_horiz</span>
+                                <span class="text">Service</span>
+                            </li>
+
+                            <li class="row gap-12">
+                                <span class="symbol">auto_awesome_motion</span>
+                                <span class="text">Payments-Service stack makes management lot easier</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept grid gap-20">
+                    <img src="{{ url_for('static', filename='assets/docs/concept-2.png') }}" alt="CONCEPT 2" class="img rounded-16 shadow-sm">
+
+                    <div class="text-content column gap-12">
+                        <span class="text uppercase highlight">concept 2</span>
+                        <h1 class="h1">INFINITY numbers</h1>
+
+                        <p class="para">The NUMBERS system in INFINITY allows you to manage each transaction, either paid or received, in a single page in chronological order. You can filter it by date range and payment type (paid or received).</p>
+
+                        <ul class="list column gap-12">
+                            <li class="row gap-12">
+                                <span class="symbol">finance</span>
+                                <span class="text">INFINITY made finance management easy than ever before.</span>
+                            </li>
+
+                            <li class="row gap-12">
+                                <span class="symbol">dataset</span>
+                                <span class="text">Organized management is now possible without spreadsheets.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>
