@@ -1,0 +1,64 @@
+/* ================================================== */
+/* MAIN */
+/* ================================================== */
+
+.main { padding: 0; }
+
+.main .section {
+    max-width: 1696px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 48px;
+}
+
+/* ================================================== */
+/* HERO */
+/* ================================================== */
+
+.hero {
+    min-height: 50vh;
+    background-color: var(--surface);
+}
+
+.hero .h1 { font-size: min(64px, 15vw); }
+.hero .para { max-width: 900px; }
+
+/* ================================================== */
+/* COMMANDS */
+/* ================================================== */
+
+.command-list .commands {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.command-list .shortcuts .h1 {
+    padding-left: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+.command-list .commands .command:not(:last-child) { border-bottom: 1px solid var(--border); }
+
+.command-list .command .keybinding .binding {
+    background-color: var(--secondary);
+    color: var(--background);
+    padding: 4px 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================================================== */
+/* & RESPONSIVENESS */
+/* ================================================== */
+
+@media (max-width: 568px) {
+    .main .section { padding: 20px; }
+
+    .command-list .command {
+        flex-direction: column;
+        align-items: start;
+        gap: 4px;
+    }
+}

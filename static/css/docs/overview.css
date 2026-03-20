@@ -2,6 +2,8 @@
 /* MAIN */
 /* ================================================== */
 
+.main { padding: 0; }
+
 .main .section {
     max-width: 1696px;
     margin: 0 auto;

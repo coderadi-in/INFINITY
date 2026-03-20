@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/icons/icon.ico') }}" type="image/x-icon">
+    <title>KEYBOARD SHORTCUTS &bull; INFINITY</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/docs/shortcuts.css') }}">
+</head>
+
+<body>
+    <header class="header p-12 row h-sb">
+        <a href="/" class="link">
+            <img src="{{ url_for('static', filename='assets/icons/logo.png') }}" alt="INFINITY LOGO" class="logo">
+        </a>
+
+        {% if current_user.is_authenticated %}
+        <a href="/dashboard/" class="link btn fl p-12 rounded-16">Dashboard</a>
+        {% else %}
+        <a href="/#start" class="link btn fl p-12 rounded-16">Sign in</a>
+        {% endif %}
+    </header>
+
+    <main class="main column gap-64">
+        <section class="hero">
+            <section class="section column h-center gap-12">
+                <h1 class="h1">Keyboard shortcuts</h1>
+                <p class="para">Master the digital architect workflow with precision. Boost your productivity using
+                    these global and contextual commands.</p>
+            </section>
+        </section>
+
+        <div class="command-list">
+            <section class="section column gap-48">
+                <div class="shortcuts column gap-24">
+                    <h1 class="h1">Clients management</h1>
+
+                    <div class="commands rounded-16">
+                        <div class="command row h-sb p-20">
+                            <span class="text">Add new client &bull; All clients page</span>
+                            <div class="keybinding flex gap-4">
+                                <span class="symbol binding">keyboard_command_key</span>
+                                <span class="text uppercase binding">alt</span>
+                                <span class="text uppercase binding">n</span>
+                            </div>
+                        </div>
+                        
+                        <div class="command row h-sb p-20">
+                            <span class="text">Update client &bull; Specific client's page</span>
+                            <div class="keybinding flex gap-4">
+                                <span class="symbol binding">keyboard_command_key</span>
+                                <span class="text uppercase binding">alt</span>
+                                <span class="text uppercase binding">u</span>
+                            </div>
+                        </div>
+                        
+                        <div class="command row h-sb p-20">
+                            <span class="text">Delete client &bull; Specific clients' page</span>
+                            <div class="keybinding flex gap-4">
+                                <span class="symbol binding">keyboard_command_key</span>
+                                <span class="text uppercase binding">alt</span>
+                                <span class="text uppercase binding">d</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcuts column gap-24">
+                    <h1 class="h1">Workflow management</h1>
+
+                    <div class="commands rounded-16">
+                        <div class="command row h-sb p-20">
+                            <span class="text">Add new service &bull; Specific client's page</span>
+                            <div class="keybinding flex gap-4">
+                                <span class="symbol binding">shift</span>
+                                <span class="text uppercase binding">alt</span>
+                                <span class="text uppercase binding">n</span>
+                            </div>
+                        </div>
+                        
+                        <div class="command row h-sb p-20">
+                            <span class="text">Add new payment &bull; Specific client's page</span>
+                            <div class="keybinding flex gap-4">
+                                <span class="symbol binding">shift</span>
+                                <span class="text uppercase binding">alt</span>
+                                <span class="text uppercase binding">p</span>
+                            </div>
+                        </div>
+                        
+                        <div class="command row h-sb p-20">
+                            <span class="text">Add new expense &bull; Expenses page</span>
+                            <div class="keybinding flex gap-4">
+                                <span class="symbol binding">keyboard_command_key</span>
+                                <span class="symbol binding">shift</span>
+                                <span class="text uppercase binding">e</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcuts column gap-24">
+                    <h1 class="h1">Other shortcuts</h1>
+
+                    <div class="commands rounded-16">
+                        <div class="command row h-sb p-20">
+                            <span class="text">Update profile &bull; Profile page</span>
+                            <div class="keybinding flex gap-4">
+                                <span class="symbol binding">keyboard_command_key</span>
+                                <span class="symbol binding">shift</span>
+                                <span class="text uppercase binding">u</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

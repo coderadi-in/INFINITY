@@ -40,7 +40,7 @@ function initTopRowBtn(btn, relatedSection) {
 
 // * FUNCTION TO RESOLVE A CSS VARIABLE
 function resolveCSSVariable(variable) {
-    const cssVariable = getComputedStyle(document.documentElement)
+    const cssVariable = getComputedStyle(document.body)
     .getPropertyValue(variable)
     .trim();
 

@@ -1,19 +1,96 @@
 /* ================================================== */
+/* MAIN */
+/* ================================================== */
+
+.main {
+    height: auto;
+    padding: 0;
+}
+
+.main .section {
+    max-width: 1696px;
+    margin: 0 auto;
+    padding: 48px;
+    height: inherit;
+}
+
+.index {
+    background-color: var(--text);
+    color: var(--background);
+}
+
+/* ================================================== */
 /* HEADER */
 /* ================================================== */
 
-.header {
-    position: fixed;
-    background-color: var(--surface-alt);
+.header { background-color: var(--surface-alt); }
+
+/* ================================================== */
+/* HERO */
+/* ================================================== */
+
+.hero .img {
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
 }
 
 /* ================================================== */
-/* CONTAINER */
+/* QUICK START */
 /* ================================================== */
 
-.section {
-    max-width: 900px;
+.quick-start {
+    background-color: var(--surface);
+    width: 100%;
 }
+
+.quick-start .link {
+    border: 1px solid var(--surface-alt);
+    flex: 1;
+}
+
+.quick-start #signupLink { background-color: var(--border); }
+
+/* ================================================== */
+/* KEYBOARD SHORTCUTS */
+/* ================================================== */
+
+.keyboard-shortcuts { background-color: var(--surface); }
+.keyboard-shortcuts .link { background-color: var(--border); }
+
+.keyboard-shortcuts .commands .command:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+}
+
+.keyboard-shortcuts .commands .command .key-comb {
+    background-color: var(--border);
+}
+
+.keyboard-shortcuts .pro-tip {
+    background-color: var(--text);
+    color: var(--background);
+}
+
+/* ================================================== */
+/* CORE CONCEPTS */
+/* ================================================== */
+
+.concepts { background-color: var(--surface); }
+
+.concepts .grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+}
+
+.concepts .concept .symbol {
+    background-color: var(--border);
+    width: fit-content;
+}
+
+/* ================================================== */
+/* START SECTION */
+/* ================================================== */
+
+.start .section { max-width: 960px; }
 
 /* ================================================== */
 /* LEFT PANEL */
@@ -53,4 +130,36 @@
 
 .right-panel {
     aspect-ratio: 1 / 1;
+}
+
+/* ================================================== */
+/* & RESPONSIVENESS */
+/* ================================================== */
+
+@media (max-width: 1024px) {
+    .upper-part { flex-direction: column; }
+}
+
+@media (max-width: 960px) {
+    .start .section {
+        flex-direction: column;
+        max-width: 568px;
+    }
+}
+
+@media (max-width: 568px) {
+    .main .section { padding: 20px; }
+    .quick-start .bottom-controls { flex-direction: column; }
+}
+
+@media (max-width: 460px) {
+    .left-panel { aspect-ratio: 2 / 2.5; }
+}
+
+@media (max-width: 386px) {
+    .left-panel { aspect-ratio: 2 / 3; }
+}
+
+@media (max-width: 340px) {
+    .left-panel { aspect-ratio: 2 / 3.5; }
 }
