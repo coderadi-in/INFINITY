@@ -21,13 +21,18 @@ def signup():
     email = request.form.get('email')
     password = request.form.get('password')
     
-    # VALIDATION
+    # FORM VALIDATION
     if (
         (not name) or
         (not email) or 
         (not password)
     ):
         flash("Some inputs aren't provided properly. Please retry again", "error")
+        return redirect(url_for('auth.start', _anchor="start"))
+
+    # EMAIL VALIDATION
+    if (User.query.filter_by(email=email).first()):
+        flash("The provided email is already linked to an INFINITY account.", "error")
         return redirect(url_for('auth.start', _anchor="start"))
     
     new_user = User(name=name, email=email, password=bcrypt.generate_password_hash(password))
